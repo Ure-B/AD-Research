@@ -7,7 +7,6 @@ import string
 from collections import Counter
 import glob
 
-# Sample Text Preprocessing
 def preprocess_text(text):
     text = text.lower()
     text = ''.join([char if char not in string.punctuation else ' ' for char in text])
@@ -22,14 +21,14 @@ def preprocess_text(text):
     
     return words, word_to_idx, idx_to_word
 
-# Convert text to graph data
+
 def text_to_graph(words, word_to_idx):
     nodes = torch.tensor([word_to_idx[word] for word in words], dtype=torch.long)
     edge_list = [(word_to_idx[words[i]], word_to_idx[words[i + 1]]) for i in range(len(words) - 1)]
     edge_index = torch.tensor(edge_list, dtype=torch.long).t().contiguous()
     return Data(x=nodes, edge_index=edge_index)
 
-# Variational Autoencoder Model
+
 class VAE(nn.Module):
     def __init__(self, num_features, hidden_dim, latent_dim, vocab_size):
         super(VAE, self).__init__()
@@ -62,7 +61,7 @@ class VAE(nn.Module):
         recon_x = self.decode(z)
         return recon_x, mu, logvar
 
-# Training Function
+
 def train_model(text_files, template_text, word_to_idx, idx_to_word, epochs=20, latent_dim=16):
     template_words, _, _ = preprocess_text(template_text)
     template_graph = text_to_graph(template_words, word_to_idx)
@@ -87,7 +86,6 @@ def train_model(text_files, template_text, word_to_idx, idx_to_word, epochs=20, 
     
     return model
 
-# Generate Text
 def generate_text(model, idx_to_word, template_words, capitalize_index=None):
     model.eval()
     
@@ -97,7 +95,6 @@ def generate_text(model, idx_to_word, template_words, capitalize_index=None):
     
     return ' '.join(generated_words)
 
-# Process Files and Train Model
 def process_text_files(template_file, text_files, output_file, capitalize_index=None):
     template_text = open(template_file, 'r').read()
     words, word_to_idx, idx_to_word = preprocess_text(template_text)
@@ -106,8 +103,7 @@ def process_text_files(template_file, text_files, output_file, capitalize_index=
     open(output_file, 'w').write(generated_text)
     print(f"Generated text saved to {output_file}")
 
-# Example Usage
 template_file = 'template.txt'
-text_files = sorted(glob.glob('file_*.txt'))  # Loads variation files in order
+text_files = sorted(glob.glob('file_*.txt')) 
 output_file = 'generated_output.txt'
 process_text_files(template_file, text_files, output_file, capitalize_index=4)
