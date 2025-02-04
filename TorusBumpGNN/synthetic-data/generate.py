@@ -42,7 +42,7 @@ def create_torus_bump_files():
     # Create mesh files and save labels
     labels = {}
     feature_range_thickness = np.linspace(0.3, 0.5, 15, endpoint=False)
-    feature_range_angle = np.linspace(0, 360, 1, endpoint=False)
+    feature_range_angle = np.linspace(0, 360, 100, endpoint=False)
     scaler = MinMaxScaler()
     scaler.fit(feature_range_angle.reshape(-1, 1))
     #scaler.fit(feature_range_thickness.reshape(-1, 1))
