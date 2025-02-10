@@ -43,7 +43,7 @@ def create_torus_color_files():
 
     # Create mesh files and save labels
     labels = {}
-    feature_range = np.linspace(0, 360, 500, endpoint=False)
+    feature_range = np.linspace(0, 360, 20, endpoint=False)
     scaler = MinMaxScaler()
     scaler.fit(feature_range.reshape(-1, 1))
 

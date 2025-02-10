@@ -64,7 +64,7 @@ class VariationalGraphAE(GAE):
 
 def save_ply(vertices, faces, reconstructed_features, min_vals, max_vals, filename):
     reconstructed_features = denormalize(reconstructed_features, min_vals, max_vals)
-    mesh = trimesh.Trimesh(vertices, faces, process=False)
+    mesh = trimesh.Trimesh(reconstructed_features, faces, process=False)
     mesh.export(filename)
     print(f"Reconstructed torus saved to: {filename}")
 
