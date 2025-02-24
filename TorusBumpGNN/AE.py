@@ -33,8 +33,8 @@ class GraphAE(torch.nn.Module):
         self.decoder_fc2 = torch.nn.Linear(hidden_dim, in_channels)
 
     def encode(self, x, edge_index):
-        device = x.device  # Ensure everything is on the same device
-        pseudo = torch.zeros(edge_index.shape[1], 3, device=device)  # 3D pseudo-coordinates
+        device = x.device  
+        pseudo = torch.zeros(edge_index.shape[1], 3, device=device) 
 
         h = F.relu(self.conv1(x, edge_index, pseudo))
         h = self.conv2(h, edge_index, pseudo)
