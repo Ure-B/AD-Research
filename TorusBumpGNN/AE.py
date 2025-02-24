@@ -5,6 +5,7 @@ from torch_geometric.data import Data
 import trimesh
 import numpy as np
 from scipy.spatial import KDTree
+from tqdm import tqdm
 
 def load_ply(filepath):
     mesh = trimesh.load_mesh(filepath)
@@ -49,7 +50,7 @@ class GraphAE(torch.nn.Module):
         z = self.encode(x, edge_index)
         return self.decode(z)
 
-def save_ply(vertices, faces, reconstructed_features, filename):
+def save_ply(faces, reconstructed_features, filename):
     mesh = trimesh.Trimesh(reconstructed_features, faces, process=False)
     mesh.export(filename)
     print(f"Reconstructed torus saved to: {filename}")
@@ -57,7 +58,8 @@ def save_ply(vertices, faces, reconstructed_features, filename):
 def train_ae(model, data, optimizer, epochs=100):
     model.train()
     print(epochs)
-    for epoch in range(epochs):
+    feature_range = np.linspace(-0.3, 0.3, epochs)
+    for epoch in tqdm(feature_range):
         optimizer.zero_grad()
         recon_x = model(data.x, data.edge_index)
         loss = F.mse_loss(recon_x, data.x) + 0.1
@@ -76,4 +78,4 @@ train_ae(model, data, optimizer)
 
 with torch.no_grad():
     reconstructed_features = model(data.x, data.edge_index).numpy()
-save_ply(vertices, faces, reconstructed_features, "reconstructed_torus.ply")
+save_ply(faces, reconstructed_features, "reconstructed_torus.ply")
