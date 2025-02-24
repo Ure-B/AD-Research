@@ -6,6 +6,7 @@ import trimesh
 import numpy as np
 from scipy.spatial import KDTree
 from tqdm import tqdm
+import os
 
 def load_ply(filepath):
     mesh = trimesh.load_mesh(filepath)
@@ -36,11 +37,9 @@ class GraphAE(torch.nn.Module):
     def encode(self, x, edge_index):
         device = x.device  
         pseudo = torch.zeros(edge_index.shape[1], 3, device=device) 
-
         h = F.relu(self.conv1(x, edge_index, pseudo))
         h = self.conv2(h, edge_index, pseudo)
         return h
-
 
     def decode(self, z):
         h = F.relu(self.decoder_fc1(z))
@@ -55,27 +54,43 @@ def save_ply(faces, reconstructed_features, filename):
     mesh.export(filename)
     print(f"Reconstructed torus saved to: {filename}")
 
-def train_ae(model, data, optimizer, epochs=100):
+def train_ae(model, train_data, optimizer, epochs=50):
     model.train()
-    print(epochs)
-    feature_range = np.linspace(-0.3, 0.3, epochs)
-    for epoch in tqdm(feature_range):
+    for epoch in tqdm(range(epochs)):
         optimizer.zero_grad()
-        recon_x = model(data.x, data.edge_index)
-        loss = F.mse_loss(recon_x, data.x) + 0.1
-        loss.backward()
-        optimizer.step()
-        if epoch % 10 == 0:
-            print(f'Epoch {epoch}, Loss: {loss.item()}')
+        total_loss = 0
+        for data in train_data:
+            recon_x = model(data.x, data.edge_index)
+            loss = F.mse_loss(recon_x, data.x)
+            loss.backward()
+            optimizer.step()
+            total_loss += loss.item()
+        if epoch % 1 == 0:
+            print(f'Epoch {epoch}, Loss: {total_loss / len(train_data)}')
 
-filepath = "torus_bump_000.ply"
-vertices, faces, features = load_ply(filepath)
-data = create_graph(vertices, features, k=16)
+train_dir = "training_data"
+test_dir = "testing_data"
+num_of_training_data = 4
+num_of_testing_data = 1
+train_files = sorted(os.listdir(train_dir))[:num_of_training_data]
+test_files = sorted(os.listdir(test_dir))[:num_of_testing_data]
+
+train_data = []
+for file in train_files:
+    vertices, faces, features = load_ply(os.path.join(train_dir, file))
+    train_data.append(create_graph(vertices, features, k=16))
+
+test_data = []
+for file in test_files:
+    vertices, faces, features = load_ply(os.path.join(test_dir, file))
+    test_data.append((vertices, faces, create_graph(vertices, features, k=16)))
 
 model = GraphAE(in_channels=3, hidden_dim=64, latent_dim=32, kernel_size=2)
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
-train_ae(model, data, optimizer)
+train_ae(model, train_data, optimizer)
 
 with torch.no_grad():
-    reconstructed_features = model(data.x, data.edge_index).numpy()
-save_ply(faces, reconstructed_features, "reconstructed_torus.ply")
+    for i in range(len(test_data)):
+        vertices, faces, data = test_data[i]
+        reconstructed_features = model(data.x, data.edge_index).numpy()
+        save_ply(faces, reconstructed_features, f"reconstructed_torus_{i}.ply")
