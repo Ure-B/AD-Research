@@ -1,0 +1,10 @@
+  0%|          | 0/60 [00:00<?, ?it/s]/Users/benjaminkwon/Desktop/ExplainingAnatomicalShapeVariability/venv/lib/python3.10/site-packages/torch_geometric/nn/conv/spline_conv.py:133: UserWarning:
+
+We do not recommend using the non-optimized CPU version of `SplineConv`. If possible, please move your data to GPU.
+Epoch 0 | Loss: 0.871698 | Recon: 0.871559 | KL: 0.139097
+
+  8%|▊         | 5/60 [04:49<52:43, 57.51s/it]
+Epoch 1 | Loss: 0.860525 | Recon: 0.860316 | KL: 0.209202
+Epoch 2 | Loss: 0.850775 | Recon: 0.850394 | KL: 0.380623
+Epoch 3 | Loss: 0.830635 | Recon: 0.829939 | KL: 0.696407
+Epoch 4 | Loss: 0.797400 | Recon: 0.796147 | KL: 1.252600

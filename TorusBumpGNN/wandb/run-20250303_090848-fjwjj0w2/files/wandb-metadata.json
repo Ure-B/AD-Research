@@ -1,0 +1,44 @@
+{
+  "os":  "macOS-13.3.1-x86_64-i386-64bit",
+  "python":  "CPython 3.10.16",
+  "startedAt":  "2025-03-03T16:08:48.155754Z",
+  "program":  "/Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/VAE.py",
+  "codePath":  "TorusBumpGNN/VAE.py",
+  "git":  {
+    "remote":  "https://github.com/Ure-B/AD-Research.git",
+    "commit":  "c7bc0da4b03c78eb39595a55d1636aac9b2a0ec3"
+  },
+  "email":  "kwonb2@mymacewan.ca",
+  "root":  "/Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN",
+  "host":  "Benjis-MacAir-M2.local",
+  "executable":  "/Users/benjaminkwon/Desktop/ExplainingAnatomicalShapeVariability/venv/bin/python",
+  "codePathLocal":  "VAE.py",
+  "cpu_count":  8,
+  "cpu_count_logical":  8,
+  "disk":  {
+    "/":  {
+      "total":  "245107195904",
+      "used":  "205115166720"
+    },
+    "/System/Volumes/Data":  {
+      "total":  "245107195904",
+      "used":  "205115166720"
+    }
+  },
+  "memory":  {
+    "total":  "8589934592"
+  },
+  "cpu":  {
+    "count":  8,
+    "countLogical":  8
+  },
+  "apple":  {
+    "name":  "Unknown",
+    "ecpuCores":  4,
+    "pcpuCores":  4,
+    "gpuCores":  8,
+    "memoryGb":  8,
+    "swapTotalBytes":  "5368709120",
+    "ramTotalBytes":  "8589934592"
+  }
+}

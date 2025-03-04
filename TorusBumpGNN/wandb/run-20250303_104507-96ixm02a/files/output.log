@@ -1,0 +1,34 @@
+/Users/benjaminkwon/Desktop/ExplainingAnatomicalShapeVariability/venv/lib/python3.10/site-packages/torch_geometric/nn/conv/spline_conv.py:133: UserWarning:
+
+We do not recommend using the non-optimized CPU version of `SplineConv`. If possible, please move your data to GPU.
+Epoch 0 | Loss: 0.545676 | Recon: 0.545357 | KL: 0.319183
+Epoch 1 | Loss: 0.525134 | Recon: 0.524822 | KL: 0.312565
+Epoch 2 | Loss: 0.507442 | Recon: 0.507128 | KL: 0.314264
+Epoch 3 | Loss: 0.496985 | Recon: 0.496660 | KL: 0.325607
+Epoch 4 | Loss: 0.485921 | Recon: 0.485575 | KL: 0.345824
+Epoch 5 | Loss: 0.472597 | Recon: 0.472223 | KL: 0.374524
+Epoch 6 | Loss: 0.459484 | Recon: 0.459073 | KL: 0.411170
+Epoch 7 | Loss: 0.447441 | Recon: 0.446986 | KL: 0.455482
+Epoch 8 | Loss: 0.445172 | Recon: 0.444665 | KL: 0.507118
+Epoch 9 | Loss: 0.432400 | Recon: 0.431835 | KL: 0.565877
+Epoch 10 | Loss: 0.421346 | Recon: 0.420714 | KL: 0.631912
+Epoch 11 | Loss: 0.409347 | Recon: 0.408642 | KL: 0.704841
+Epoch 12 | Loss: 0.400935 | Recon: 0.400150 | KL: 0.784792
+Epoch 13 | Loss: 0.392100 | Recon: 0.391228 | KL: 0.872062
+Epoch 14 | Loss: 0.382786 | Recon: 0.381820 | KL: 0.966929
+Epoch 15 | Loss: 0.368676 | Recon: 0.367606 | KL: 1.070304
+Epoch 16 | Loss: 0.355263 | Recon: 0.354081 | KL: 1.182188
+Epoch 17 | Loss: 0.345585 | Recon: 0.344282 | KL: 1.302809
+Epoch 18 | Loss: 0.336128 | Recon: 0.334696 | KL: 1.432664
+Epoch 19 | Loss: 0.318028 | Recon: 0.316455 | KL: 1.573018
+Epoch 20 | Loss: 0.307181 | Recon: 0.305458 | KL: 1.723560
+Epoch 21 | Loss: 0.293066 | Recon: 0.291181 | KL: 1.885404
+Epoch 22 | Loss: 0.280520 | Recon: 0.278461 | KL: 2.058941
+Epoch 23 | Loss: 0.265782 | Recon: 0.263537 | KL: 2.244637
+Epoch 24 | Loss: 0.251491 | Recon: 0.249048 | KL: 2.442999
+Epoch 25 | Loss: 0.236211 | Recon: 0.233557 | KL: 2.654491
+Epoch 26 | Loss: 0.220806 | Recon: 0.217927 | KL: 2.879358
+Epoch 27 | Loss: 0.205064 | Recon: 0.201947 | KL: 3.117832
+Epoch 28 | Loss: 0.192451 | Recon: 0.189082 | KL: 3.369174
+Epoch 29 | Loss: 0.180665 | Recon: 0.177033 | KL: 3.632785
+Reconstructed torus saved to: reconstructed_torus_VAE_0.ply

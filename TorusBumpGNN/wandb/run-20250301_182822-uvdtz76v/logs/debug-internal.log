@@ -1,0 +1,26 @@
+{"time":"2025-03-01T18:28:22.624458-07:00","level":"INFO","msg":"stream: starting","core version":"0.19.7","symlink path":"/Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/wandb/run-20250301_182822-uvdtz76v/logs/debug-core.log"}
+{"time":"2025-03-01T18:28:22.756584-07:00","level":"INFO","msg":"created new stream","id":"uvdtz76v"}
+{"time":"2025-03-01T18:28:22.756682-07:00","level":"INFO","msg":"stream: started","id":"uvdtz76v"}
+{"time":"2025-03-01T18:28:22.756727-07:00","level":"INFO","msg":"writer: Do: started","stream_id":"uvdtz76v"}
+{"time":"2025-03-01T18:28:22.756909-07:00","level":"INFO","msg":"handler: started","stream_id":"uvdtz76v"}
+{"time":"2025-03-01T18:28:22.75702-07:00","level":"INFO","msg":"sender: started","stream_id":"uvdtz76v"}
+{"time":"2025-03-01T18:28:23.558001-07:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-03-01T18:40:39.37544-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/tapflow-inc/VAE/uvdtz76v/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-03-01T18:40:41.666727-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/tapflow-inc/VAE/uvdtz76v/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-03-01T18:40:46.651842-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/tapflow-inc/VAE/uvdtz76v/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-03-01T18:41:09.003578-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+{"time":"2025-03-01T18:41:41.15972-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+{"time":"2025-03-01T18:41:47.609286-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": read tcp [2605:b100:70f:2afd:2116:6990:9bb0:5591]:53305->[64:ff9b::23ba:e431]:443: read: no route to host"}
+{"time":"2025-03-01T20:38:37.613398-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": read tcp 10.100.0.120:53558->35.186.228.49:443: read: connection reset by peer"}
+{"time":"2025-03-01T21:45:27.43201-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": read tcp 10.100.0.120:53990->35.186.228.49:443: read: connection reset by peer"}
+{"time":"2025-03-01T22:21:37.756442-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": read tcp 10.100.0.120:54494->35.186.228.49:443: read: connection reset by peer"}
+{"time":"2025-03-01T23:28:53.599287-07:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/tapflow-inc/VAE/uvdtz76v/file_stream\": read tcp 10.100.0.120:55544->35.186.228.49:443: read: connection reset by peer"}
+{"time":"2025-03-01T23:33:22.690955-07:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-03-01T23:33:22.69734-07:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-03-01T23:33:23.436769-07:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-03-01T23:33:23.74089-07:00","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-03-01T23:33:24.774555-07:00","level":"INFO","msg":"stream: closing","id":"uvdtz76v"}
+{"time":"2025-03-01T23:33:24.774593-07:00","level":"INFO","msg":"handler: closed","stream_id":"uvdtz76v"}
+{"time":"2025-03-01T23:33:24.775494-07:00","level":"INFO","msg":"sender: closed","stream_id":"uvdtz76v"}
+{"time":"2025-03-01T23:33:24.775145-07:00","level":"INFO","msg":"writer: Close: closed","stream_id":"uvdtz76v"}
+{"time":"2025-03-01T23:33:24.776262-07:00","level":"INFO","msg":"stream: closed","id":"uvdtz76v"}

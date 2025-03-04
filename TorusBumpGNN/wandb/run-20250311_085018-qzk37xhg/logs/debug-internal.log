@@ -1,0 +1,7 @@
+{"time":"2025-03-11T08:50:18.84484-06:00","level":"INFO","msg":"stream: starting","core version":"0.19.7","symlink path":"/Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/wandb/run-20250311_085018-qzk37xhg/logs/debug-core.log"}
+{"time":"2025-03-11T08:50:18.969508-06:00","level":"INFO","msg":"created new stream","id":"qzk37xhg"}
+{"time":"2025-03-11T08:50:18.969609-06:00","level":"INFO","msg":"writer: Do: started","stream_id":"qzk37xhg"}
+{"time":"2025-03-11T08:50:18.969635-06:00","level":"INFO","msg":"stream: started","id":"qzk37xhg"}
+{"time":"2025-03-11T08:50:18.969837-06:00","level":"INFO","msg":"handler: started","stream_id":"qzk37xhg"}
+{"time":"2025-03-11T08:50:18.969919-06:00","level":"INFO","msg":"sender: started","stream_id":"qzk37xhg"}
+{"time":"2025-03-11T08:50:19.278974-06:00","level":"INFO","msg":"Starting system monitor"}

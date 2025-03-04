@@ -1,0 +1,1 @@
+{"_wandb":{"runtime":391},"train/loss":0.18066532909870148,"train/recon_loss":0.17703254520893097,"train/kl_loss":3.6327850818634033,"_timestamp":1.741024292080053e+09,"_runtime":384.973495,"_step":29,"epoch":29}

@@ -1,0 +1,15 @@
+{"time":"2025-03-03T09:03:41.525643-07:00","level":"INFO","msg":"stream: starting","core version":"0.19.7","symlink path":"/Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/wandb/run-20250303_090341-mikchcxf/logs/debug-core.log"}
+{"time":"2025-03-03T09:03:41.66196-07:00","level":"INFO","msg":"created new stream","id":"mikchcxf"}
+{"time":"2025-03-03T09:03:41.662178-07:00","level":"INFO","msg":"handler: started","stream_id":"mikchcxf"}
+{"time":"2025-03-03T09:03:41.662245-07:00","level":"INFO","msg":"stream: started","id":"mikchcxf"}
+{"time":"2025-03-03T09:03:41.662296-07:00","level":"INFO","msg":"writer: Do: started","stream_id":"mikchcxf"}
+{"time":"2025-03-03T09:03:41.662423-07:00","level":"INFO","msg":"sender: started","stream_id":"mikchcxf"}
+{"time":"2025-03-03T09:03:41.939452-07:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-03-03T09:03:42.851308-07:00","level":"INFO","msg":"stream: closing","id":"mikchcxf"}
+{"time":"2025-03-03T09:03:42.851615-07:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-03-03T09:03:42.853509-07:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-03-03T09:03:43.351522-07:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-03-03T09:03:43.542133-07:00","level":"INFO","msg":"handler: closed","stream_id":"mikchcxf"}
+{"time":"2025-03-03T09:03:43.542334-07:00","level":"INFO","msg":"sender: closed","stream_id":"mikchcxf"}
+{"time":"2025-03-03T09:03:43.542325-07:00","level":"INFO","msg":"writer: Close: closed","stream_id":"mikchcxf"}
+{"time":"2025-03-03T09:03:43.542591-07:00","level":"INFO","msg":"stream: closed","id":"mikchcxf"}

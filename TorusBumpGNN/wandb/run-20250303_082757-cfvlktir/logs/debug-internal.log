@@ -1,0 +1,16 @@
+{"time":"2025-03-03T08:27:57.361108-07:00","level":"INFO","msg":"stream: starting","core version":"0.19.7","symlink path":"/Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/wandb/run-20250303_082757-cfvlktir/logs/debug-core.log"}
+{"time":"2025-03-03T08:27:57.497729-07:00","level":"INFO","msg":"created new stream","id":"cfvlktir"}
+{"time":"2025-03-03T08:27:57.497829-07:00","level":"INFO","msg":"writer: Do: started","stream_id":"cfvlktir"}
+{"time":"2025-03-03T08:27:57.497987-07:00","level":"INFO","msg":"stream: started","id":"cfvlktir"}
+{"time":"2025-03-03T08:27:57.497963-07:00","level":"INFO","msg":"handler: started","stream_id":"cfvlktir"}
+{"time":"2025-03-03T08:27:57.498125-07:00","level":"INFO","msg":"sender: started","stream_id":"cfvlktir"}
+{"time":"2025-03-03T08:27:58.020149-07:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-03-03T08:30:14.20835-07:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-03-03T08:30:14.212062-07:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-03-03T08:30:14.845484-07:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-03-03T08:30:15.07216-07:00","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-03-03T08:30:16.08805-07:00","level":"INFO","msg":"stream: closing","id":"cfvlktir"}
+{"time":"2025-03-03T08:30:16.088137-07:00","level":"INFO","msg":"handler: closed","stream_id":"cfvlktir"}
+{"time":"2025-03-03T08:30:16.088864-07:00","level":"INFO","msg":"sender: closed","stream_id":"cfvlktir"}
+{"time":"2025-03-03T08:30:16.088788-07:00","level":"INFO","msg":"writer: Close: closed","stream_id":"cfvlktir"}
+{"time":"2025-03-03T08:30:16.08945-07:00","level":"INFO","msg":"stream: closed","id":"cfvlktir"}

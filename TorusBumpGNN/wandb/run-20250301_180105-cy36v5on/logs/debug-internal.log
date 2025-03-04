@@ -1,0 +1,16 @@
+{"time":"2025-03-01T18:01:05.989403-07:00","level":"INFO","msg":"stream: starting","core version":"0.19.7","symlink path":"/Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/wandb/run-20250301_180105-cy36v5on/logs/debug-core.log"}
+{"time":"2025-03-01T18:01:06.549552-07:00","level":"INFO","msg":"created new stream","id":"cy36v5on"}
+{"time":"2025-03-01T18:01:06.549652-07:00","level":"INFO","msg":"stream: started","id":"cy36v5on"}
+{"time":"2025-03-01T18:01:06.549666-07:00","level":"INFO","msg":"writer: Do: started","stream_id":"cy36v5on"}
+{"time":"2025-03-01T18:01:06.549687-07:00","level":"INFO","msg":"handler: started","stream_id":"cy36v5on"}
+{"time":"2025-03-01T18:01:06.549694-07:00","level":"INFO","msg":"sender: started","stream_id":"cy36v5on"}
+{"time":"2025-03-01T18:01:07.012761-07:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-03-01T18:04:04.749449-07:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-03-01T18:04:04.752426-07:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-03-01T18:04:05.76735-07:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading config.yaml","runtime_seconds":0.156050042,"progress":"630B/630B"}],"total_operations":1}}
+{"time":"2025-03-01T18:04:05.843296-07:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-03-01T18:04:07.296955-07:00","level":"INFO","msg":"stream: closing","id":"cy36v5on"}
+{"time":"2025-03-01T18:04:07.297041-07:00","level":"INFO","msg":"handler: closed","stream_id":"cy36v5on"}
+{"time":"2025-03-01T18:04:07.297806-07:00","level":"INFO","msg":"sender: closed","stream_id":"cy36v5on"}
+{"time":"2025-03-01T18:04:07.297731-07:00","level":"INFO","msg":"writer: Close: closed","stream_id":"cy36v5on"}
+{"time":"2025-03-01T18:04:07.298896-07:00","level":"INFO","msg":"stream: closed","id":"cy36v5on"}
