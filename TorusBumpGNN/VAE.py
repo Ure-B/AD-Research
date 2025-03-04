@@ -111,7 +111,7 @@ def train_vae(model, train_data, optimizer, epochs=50, beta=3.0):
 
     model.train()
 
-    for epoch in range(epochs):
+    for epoch in tqdm(range(epochs)):
         total_loss = 0.0
         total_recon_loss = 0.0
         total_kl_loss = 0.0
