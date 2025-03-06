@@ -1,0 +1,14 @@
+{"time":"2025-03-04T01:07:14.146593-07:00","level":"INFO","msg":"stream: starting","core version":"0.19.7","symlink path":"/Users/brendanure/Desktop/ADResearch/AD-Research/TorusBumpGNN/wandb/offline-run-20250304_010714-to2elxdo/logs/debug-core.log"}
+{"time":"2025-03-04T01:07:14.250951-07:00","level":"INFO","msg":"created new stream","id":"to2elxdo"}
+{"time":"2025-03-04T01:07:14.250979-07:00","level":"INFO","msg":"stream: started","id":"to2elxdo"}
+{"time":"2025-03-04T01:07:14.250993-07:00","level":"INFO","msg":"writer: Do: started","stream_id":"to2elxdo"}
+{"time":"2025-03-04T01:07:14.251006-07:00","level":"INFO","msg":"sender: started","stream_id":"to2elxdo"}
+{"time":"2025-03-04T01:07:14.25103-07:00","level":"INFO","msg":"handler: started","stream_id":"to2elxdo"}
+{"time":"2025-03-04T01:07:14.252851-07:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-03-04T01:07:24.455722-07:00","level":"INFO","msg":"stream: closing","id":"to2elxdo"}
+{"time":"2025-03-04T01:07:24.455741-07:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-03-04T01:07:24.456001-07:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-03-04T01:07:24.456036-07:00","level":"INFO","msg":"handler: closed","stream_id":"to2elxdo"}
+{"time":"2025-03-04T01:07:24.456039-07:00","level":"INFO","msg":"writer: Close: closed","stream_id":"to2elxdo"}
+{"time":"2025-03-04T01:07:24.456042-07:00","level":"INFO","msg":"sender: closed","stream_id":"to2elxdo"}
+{"time":"2025-03-04T01:07:24.456189-07:00","level":"INFO","msg":"stream: closed","id":"to2elxdo"}

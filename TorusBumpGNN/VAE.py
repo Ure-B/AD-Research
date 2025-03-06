@@ -4,10 +4,10 @@ from torch_geometric.nn import SplineConv
 from torch_geometric.data import Data
 import trimesh
 import numpy as np
-from scipy.spatial import KDTree
 from tqdm import tqdm
 import os
 import wandb
+from torch_geometric.nn import knn_graph
 
 def load_ply(filepath):
     """
@@ -17,22 +17,23 @@ def load_ply(filepath):
     vertices = mesh.vertices
     faces = mesh.faces
     features = vertices
+    features = normalize_vertices(features) 
     return vertices, faces, features
 
+def normalize_vertices(vertices):
+    """
+    Normalize the vertices using Z-score normalization (zero mean, unit variance)
+    """
+    mean = vertices.mean(axis=0)
+    std = vertices.std(axis=0)
+    return (vertices - mean) / std
 
 def create_graph(vertices, features, k=16):
     """
     Creates graph using k-nearest neighbors for edges
     """
-    tree = KDTree(vertices)
-    edges = []
-    for i, v in enumerate(vertices):
-        _, idx = tree.query(v, k=k + 1)
-        for j in idx[1:]:
-            edges.append((i, j))
-    edge_index = torch.tensor(np.array(edges).T, dtype=torch.long)
-
     x = torch.tensor(features, dtype=torch.float)
+    edge_index = knn_graph(x, k=k, batch=None, loop=False)
     return Data(x=x, edge_index=edge_index)
 
 
@@ -45,12 +46,13 @@ class GraphVAE(torch.nn.Module):
         super(GraphVAE, self).__init__()
         # Encoder
         self.conv1 = SplineConv(in_channels, hidden_dim, dim=3, kernel_size=kernel_size)
-        # Output size is 2 * latent_dim because we need (mu, logvar)
-        self.conv2 = SplineConv(hidden_dim, 2 * latent_dim, dim=3, kernel_size=kernel_size)
+        self.conv2 = SplineConv(hidden_dim, hidden_dim, dim=3, kernel_size=kernel_size) 
+        self.conv3 = SplineConv(hidden_dim, 2 * latent_dim, dim=3, kernel_size=kernel_size)
 
         # Decoder
         self.decoder_fc1 = torch.nn.Linear(latent_dim, hidden_dim)
-        self.decoder_fc2 = torch.nn.Linear(hidden_dim, in_channels)
+        self.decoder_fc2 = torch.nn.Linear(hidden_dim, hidden_dim)
+        self.decoder_fc3 = torch.nn.Linear(hidden_dim, in_channels)
 
         self.latent_dim = latent_dim
 
@@ -61,13 +63,10 @@ class GraphVAE(torch.nn.Module):
         device = x.device
         pseudo = torch.zeros(edge_index.shape[1], 3, device=device)
 
-         # first convolution layer
         h = F.relu(self.conv1(x, edge_index, pseudo))
+        h = F.relu(self.conv2(h, edge_index, pseudo))
+        h = self.conv3(h, edge_index, pseudo)
 
-        # second convolution
-        h = self.conv2(h, edge_index, pseudo)
-
-        # Split into mu and logvar
         mu = h[:, :self.latent_dim]
         logvar = h[:, self.latent_dim:]
 
@@ -86,7 +85,8 @@ class GraphVAE(torch.nn.Module):
     def decode(self, z):
         """Decode to reconstruct original shape"""
         h = F.relu(self.decoder_fc1(z))
-        return self.decoder_fc2(h)
+        h = F.relu(self.decoder_fc2(h))
+        return self.decoder_fc3(h)
 
     def forward(self, x, edge_index):
         """
@@ -96,7 +96,6 @@ class GraphVAE(torch.nn.Module):
         z = self.reparameterize(mu, logvar)
         recon_x = self.decode(z)
         return recon_x, mu, logvar
-
 
 def save_ply(faces, reconstructed_features, filename):
     """
@@ -137,13 +136,12 @@ def train_vae(model, train_data, optimizer, epochs=50, beta=3.0):
             total_recon_loss += recon_loss.item()
             total_kl_loss += kl_loss.item()
 
-        # Average losses  for wandb tracking
+        # Average losses for wandb tracking
         avg_loss = total_loss / len(train_data)
         avg_recon_loss = total_recon_loss / len(train_data)
         avg_kl_loss = total_kl_loss / len(train_data)
 
         print(f"Epoch {epoch} | Loss: {avg_loss:.6f} | Recon: {avg_recon_loss:.6f} | KL: {avg_kl_loss:.6f}")
-
 
         wandb.log({
             'epoch': epoch,
@@ -159,10 +157,10 @@ if __name__ == "__main__":
 
     config = wandb.config
     config.epochs = 5
-    config.beta = 0.01
+    config.beta = 0.001
     config.learning_rate = 0.001
     config.hidden_dim = 64
-    config.latent_dim = 256
+    config.latent_dim = 16
 
     train_dir = "training_data"
     test_dir = "testing_data"
@@ -190,7 +188,7 @@ if __name__ == "__main__":
         in_channels=3,
         hidden_dim=config.hidden_dim,
         latent_dim=config.latent_dim,
-        kernel_size=16
+        kernel_size=2
     )
 
     # Optimizer
@@ -210,7 +208,4 @@ if __name__ == "__main__":
             output_filename = f"reconstructed_torus_VAE_{i}.ply"
             save_ply(faces, reconstructed_features, output_filename)
 
-
     wandb.finish()
-
-

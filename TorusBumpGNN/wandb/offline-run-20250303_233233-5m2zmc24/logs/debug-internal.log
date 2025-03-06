@@ -1,0 +1,14 @@
+{"time":"2025-03-03T23:32:33.99558-07:00","level":"INFO","msg":"stream: starting","core version":"0.19.7","symlink path":"/Users/brendanure/Desktop/ADResearch/AD-Research/TorusBumpGNN/wandb/offline-run-20250303_233233-5m2zmc24/logs/debug-core.log"}
+{"time":"2025-03-03T23:32:34.101587-07:00","level":"INFO","msg":"created new stream","id":"5m2zmc24"}
+{"time":"2025-03-03T23:32:34.101631-07:00","level":"INFO","msg":"stream: started","id":"5m2zmc24"}
+{"time":"2025-03-03T23:32:34.101853-07:00","level":"INFO","msg":"writer: Do: started","stream_id":"5m2zmc24"}
+{"time":"2025-03-03T23:32:34.101905-07:00","level":"INFO","msg":"handler: started","stream_id":"5m2zmc24"}
+{"time":"2025-03-03T23:32:34.101996-07:00","level":"INFO","msg":"sender: started","stream_id":"5m2zmc24"}
+{"time":"2025-03-03T23:32:34.104239-07:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-03-03T23:33:01.148883-07:00","level":"INFO","msg":"stream: closing","id":"5m2zmc24"}
+{"time":"2025-03-03T23:33:01.149102-07:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-03-03T23:33:01.14972-07:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-03-03T23:33:01.150004-07:00","level":"INFO","msg":"writer: Close: closed","stream_id":"5m2zmc24"}
+{"time":"2025-03-03T23:33:01.150019-07:00","level":"INFO","msg":"sender: closed","stream_id":"5m2zmc24"}
+{"time":"2025-03-03T23:33:01.150166-07:00","level":"INFO","msg":"handler: closed","stream_id":"5m2zmc24"}
+{"time":"2025-03-03T23:33:01.150205-07:00","level":"INFO","msg":"stream: closed","id":"5m2zmc24"}

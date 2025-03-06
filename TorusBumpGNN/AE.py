@@ -54,7 +54,7 @@ def save_ply(faces, reconstructed_features, filename):
     mesh.export(filename)
     print(f"Reconstructed torus saved to: {filename}")
 
-def train_ae(model, train_data, optimizer, epochs=50):
+def train_ae(model, train_data, optimizer, epochs=100):
     model.train()
     for epoch in tqdm(range(epochs)):
         optimizer.zero_grad()
@@ -85,7 +85,7 @@ for file in test_files:
     vertices, faces, features = load_ply(os.path.join(test_dir, file))
     test_data.append((vertices, faces, create_graph(vertices, features, k=16)))
 
-model = GraphAE(in_channels=3, hidden_dim=64, latent_dim=32, kernel_size=2)
+model = GraphAE(in_channels=3, hidden_dim=64, latent_dim=16, kernel_size=2)
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 train_ae(model, train_data, optimizer)
 

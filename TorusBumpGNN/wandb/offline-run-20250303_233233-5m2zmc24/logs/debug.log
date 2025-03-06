@@ -1,0 +1,51 @@
+2025-03-03 23:32:33,936 INFO    MainThread:14929 [wandb_setup.py:_flush():67] Current SDK version is 0.19.7
+2025-03-03 23:32:33,936 INFO    MainThread:14929 [wandb_setup.py:_flush():67] Configure stats pid to 14929
+2025-03-03 23:32:33,936 INFO    MainThread:14929 [wandb_setup.py:_flush():67] Loading settings from /Users/brendanure/.config/wandb/settings
+2025-03-03 23:32:33,936 INFO    MainThread:14929 [wandb_setup.py:_flush():67] Loading settings from /Users/brendanure/Desktop/ADResearch/AD-Research/TorusBumpGNN/wandb/settings
+2025-03-03 23:32:33,936 INFO    MainThread:14929 [wandb_setup.py:_flush():67] Loading settings from environment variables
+2025-03-03 23:32:33,936 INFO    MainThread:14929 [wandb_init.py:setup_run_log_directory():647] Logging user logs to /Users/brendanure/Desktop/ADResearch/AD-Research/TorusBumpGNN/wandb/offline-run-20250303_233233-5m2zmc24/logs/debug.log
+2025-03-03 23:32:33,936 INFO    MainThread:14929 [wandb_init.py:setup_run_log_directory():648] Logging internal logs to /Users/brendanure/Desktop/ADResearch/AD-Research/TorusBumpGNN/wandb/offline-run-20250303_233233-5m2zmc24/logs/debug-internal.log
+2025-03-03 23:32:33,936 INFO    MainThread:14929 [wandb_init.py:init():761] calling init triggers
+2025-03-03 23:32:33,936 INFO    MainThread:14929 [wandb_init.py:init():766] wandb.init called with sweep_config: {}
+config: {'_wandb': {}}
+2025-03-03 23:32:33,936 INFO    MainThread:14929 [wandb_init.py:init():784] starting backend
+2025-03-03 23:32:33,936 INFO    MainThread:14929 [wandb_init.py:init():788] sending inform_init request
+2025-03-03 23:32:33,974 INFO    MainThread:14929 [backend.py:_multiprocessing_setup():97] multiprocessing start_methods=spawn,fork,forkserver, using: spawn
+2025-03-03 23:32:33,975 INFO    MainThread:14929 [wandb_init.py:init():803] backend started and connected
+2025-03-03 23:32:33,977 INFO    MainThread:14929 [wandb_init.py:init():896] updated telemetry
+2025-03-03 23:32:33,994 INFO    MainThread:14929 [wandb_init.py:init():920] communicating run to backend with 90.0 second timeout
+2025-03-03 23:32:34,102 INFO    MainThread:14929 [wandb_init.py:init():995] starting run threads in backend
+2025-03-03 23:32:34,191 INFO    MainThread:14929 [wandb_run.py:_console_start():2377] atexit reg
+2025-03-03 23:32:34,191 INFO    MainThread:14929 [wandb_run.py:_redirect():2227] redirect: wrap_raw
+2025-03-03 23:32:34,192 INFO    MainThread:14929 [wandb_run.py:_redirect():2292] Wrapping output streams.
+2025-03-03 23:32:34,192 INFO    MainThread:14929 [wandb_run.py:_redirect():2317] Redirects installed.
+2025-03-03 23:32:34,193 INFO    MainThread:14929 [wandb_init.py:init():1037] run started, returning control to user process
+2025-03-03 23:32:34,193 INFO    MainThread:14929 [wandb_config.py:__setitem__():154] config set epochs = 5 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x11e4fa120>>
+2025-03-03 23:32:34,193 INFO    MainThread:14929 [wandb_run.py:_config_callback():1261] config_cb epochs 5 None
+2025-03-03 23:32:34,193 INFO    MainThread:14929 [wandb_config.py:__setitem__():154] config set beta = 0.01 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x11e4fa120>>
+2025-03-03 23:32:34,193 INFO    MainThread:14929 [wandb_run.py:_config_callback():1261] config_cb beta 0.01 None
+2025-03-03 23:32:34,193 INFO    MainThread:14929 [wandb_config.py:__setitem__():154] config set learning_rate = 0.001 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x11e4fa120>>
+2025-03-03 23:32:34,193 INFO    MainThread:14929 [wandb_run.py:_config_callback():1261] config_cb learning_rate 0.001 None
+2025-03-03 23:32:34,193 INFO    MainThread:14929 [wandb_config.py:__setitem__():154] config set hidden_dim = 64 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x11e4fa120>>
+2025-03-03 23:32:34,193 INFO    MainThread:14929 [wandb_run.py:_config_callback():1261] config_cb hidden_dim 64 None
+2025-03-03 23:32:34,193 INFO    MainThread:14929 [wandb_config.py:__setitem__():154] config set latent_dim = 256 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x11e4fa120>>
+2025-03-03 23:32:34,193 INFO    MainThread:14929 [wandb_run.py:_config_callback():1261] config_cb latent_dim 256 None
+2025-03-03 23:33:01,148 WARNING MsgRouterThr:14929 [router.py:message_loop():77] message_loop has been closed
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/wandb/sdk/interface/router_sock.py", line 28, in _read_message
+    resp = self._sock_client.read_server_response(timeout=1)
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/wandb/sdk/lib/sock_client.py", line 285, in read_server_response
+    data = self._read_packet_bytes(timeout=timeout)
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/wandb/sdk/lib/sock_client.py", line 270, in _read_packet_bytes
+    raise SockClientClosedError
+wandb.sdk.lib.sock_client.SockClientClosedError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/wandb/sdk/interface/router.py", line 70, in message_loop
+    msg = self._read_message()
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/wandb/sdk/interface/router_sock.py", line 30, in _read_message
+    raise MessageRouterClosedError from e
+wandb.sdk.interface.router.MessageRouterClosedError
+2025-03-03 23:33:01,149 INFO    MsgRouterThr:14929 [mailbox.py:close():115] Closing mailbox, abandoning 0 handles.

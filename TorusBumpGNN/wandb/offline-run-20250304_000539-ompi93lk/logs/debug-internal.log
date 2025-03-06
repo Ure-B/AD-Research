@@ -1,0 +1,15 @@
+{"time":"2025-03-04T00:05:39.435866-07:00","level":"INFO","msg":"stream: starting","core version":"0.19.7","symlink path":"/Users/brendanure/Desktop/ADResearch/AD-Research/TorusBumpGNN/wandb/offline-run-20250304_000539-ompi93lk/logs/debug-core.log"}
+{"time":"2025-03-04T00:05:39.542054-07:00","level":"INFO","msg":"created new stream","id":"ompi93lk"}
+{"time":"2025-03-04T00:05:39.542089-07:00","level":"INFO","msg":"stream: started","id":"ompi93lk"}
+{"time":"2025-03-04T00:05:39.542172-07:00","level":"INFO","msg":"handler: started","stream_id":"ompi93lk"}
+{"time":"2025-03-04T00:05:39.542279-07:00","level":"INFO","msg":"writer: Do: started","stream_id":"ompi93lk"}
+{"time":"2025-03-04T00:05:39.542389-07:00","level":"INFO","msg":"sender: started","stream_id":"ompi93lk"}
+{"time":"2025-03-04T00:05:39.544192-07:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-03-04T00:12:22.48393-07:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-03-04T00:12:22.484477-07:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-03-04T00:12:22.485376-07:00","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-03-04T00:12:23.490913-07:00","level":"INFO","msg":"stream: closing","id":"ompi93lk"}
+{"time":"2025-03-04T00:12:23.490993-07:00","level":"INFO","msg":"writer: Close: closed","stream_id":"ompi93lk"}
+{"time":"2025-03-04T00:12:23.491042-07:00","level":"INFO","msg":"sender: closed","stream_id":"ompi93lk"}
+{"time":"2025-03-04T00:12:23.491223-07:00","level":"INFO","msg":"handler: closed","stream_id":"ompi93lk"}
+{"time":"2025-03-04T00:12:23.491244-07:00","level":"INFO","msg":"stream: closed","id":"ompi93lk"}
