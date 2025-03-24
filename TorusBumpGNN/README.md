@@ -3,3 +3,6 @@
     - pip install torch-geometric
     - pip install trimesh
     - pip install scipy
+
+## Running on Cedar
+source ~/ad-env/bin/activate
