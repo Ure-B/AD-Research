@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "/Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/VAE.py", line 179, in <module>
+    train_data.append(create_graph(vertices, features, k=16))
+  File "/Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/VAE.py", line 36, in create_graph
+    edge_index = knn_graph(x, k=k, batch=None, loop=False)
+  File "/Users/benjaminkwon/Desktop/ExplainingAnatomicalShapeVariability/venv/lib/python3.10/site-packages/torch_geometric/nn/pool/__init__.py", line 171, in knn_graph
+    return torch_cluster.knn_graph(x, k, batch, loop, flow, cosine,
+  File "/Users/benjaminkwon/Desktop/ExplainingAnatomicalShapeVariability/venv/lib/python3.10/site-packages/torch_geometric/typing.py", line 104, in __getattr__
+    raise ImportError(f"'{key}' requires 'torch-cluster'")
+ImportError: 'knn_graph' requires 'torch-cluster'
+Traceback (most recent call last):
+  File "/Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/VAE.py", line 179, in <module>
+    train_data.append(create_graph(vertices, features, k=16))
+  File "/Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/VAE.py", line 36, in create_graph
+    edge_index = knn_graph(x, k=k, batch=None, loop=False)
+  File "/Users/benjaminkwon/Desktop/ExplainingAnatomicalShapeVariability/venv/lib/python3.10/site-packages/torch_geometric/nn/pool/__init__.py", line 171, in knn_graph
+    return torch_cluster.knn_graph(x, k, batch, loop, flow, cosine,
+  File "/Users/benjaminkwon/Desktop/ExplainingAnatomicalShapeVariability/venv/lib/python3.10/site-packages/torch_geometric/typing.py", line 104, in __getattr__
+    raise ImportError(f"'{key}' requires 'torch-cluster'")
+ImportError: 'knn_graph' requires 'torch-cluster'

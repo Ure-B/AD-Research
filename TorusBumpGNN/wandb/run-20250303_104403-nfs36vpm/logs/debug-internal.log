@@ -1,0 +1,15 @@
+{"time":"2025-03-03T10:44:03.325521-07:00","level":"INFO","msg":"stream: starting","core version":"0.19.7","symlink path":"/Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/wandb/run-20250303_104403-nfs36vpm/logs/debug-core.log"}
+{"time":"2025-03-03T10:44:03.476337-07:00","level":"INFO","msg":"created new stream","id":"nfs36vpm"}
+{"time":"2025-03-03T10:44:03.476452-07:00","level":"INFO","msg":"writer: Do: started","stream_id":"nfs36vpm"}
+{"time":"2025-03-03T10:44:03.476588-07:00","level":"INFO","msg":"stream: started","id":"nfs36vpm"}
+{"time":"2025-03-03T10:44:03.476643-07:00","level":"INFO","msg":"handler: started","stream_id":"nfs36vpm"}
+{"time":"2025-03-03T10:44:03.476715-07:00","level":"INFO","msg":"sender: started","stream_id":"nfs36vpm"}
+{"time":"2025-03-03T10:44:03.828041-07:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-03-03T10:44:04.435998-07:00","level":"INFO","msg":"stream: closing","id":"nfs36vpm"}
+{"time":"2025-03-03T10:44:04.436304-07:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-03-03T10:44:04.439468-07:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-03-03T10:44:05.013443-07:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-03-03T10:44:05.30206-07:00","level":"INFO","msg":"handler: closed","stream_id":"nfs36vpm"}
+{"time":"2025-03-03T10:44:05.302509-07:00","level":"INFO","msg":"sender: closed","stream_id":"nfs36vpm"}
+{"time":"2025-03-03T10:44:05.302481-07:00","level":"INFO","msg":"writer: Close: closed","stream_id":"nfs36vpm"}
+{"time":"2025-03-03T10:44:05.302958-07:00","level":"INFO","msg":"stream: closed","id":"nfs36vpm"}

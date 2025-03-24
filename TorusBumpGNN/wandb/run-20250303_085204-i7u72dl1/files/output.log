@@ -1,0 +1,42 @@
+/Users/benjaminkwon/Desktop/ExplainingAnatomicalShapeVariability/venv/lib/python3.10/site-packages/torch_geometric/nn/conv/spline_conv.py:133: UserWarning:
+
+We do not recommend using the non-optimized CPU version of `SplineConv`. If possible, please move your data to GPU.
+Epoch 0 | Loss: 0.895028 | Recon: 0.557189 | KL: 0.337838
+Epoch 1 | Loss: 0.830117 | Recon: 0.549092 | KL: 0.281025
+Epoch 2 | Loss: 0.770045 | Recon: 0.537334 | KL: 0.232711
+Epoch 3 | Loss: 0.724574 | Recon: 0.532550 | KL: 0.192024
+Epoch 4 | Loss: 0.679603 | Recon: 0.521481 | KL: 0.158123
+Epoch 5 | Loss: 0.647433 | Recon: 0.517248 | KL: 0.130185
+Epoch 6 | Loss: 0.619752 | Recon: 0.512280 | KL: 0.107472
+Epoch 7 | Loss: 0.596363 | Recon: 0.507099 | KL: 0.089264
+Epoch 8 | Loss: 0.576696 | Recon: 0.501827 | KL: 0.074869
+Epoch 9 | Loss: 0.562550 | Recon: 0.498881 | KL: 0.063669
+Epoch 10 | Loss: 0.546680 | Recon: 0.491618 | KL: 0.055062
+Epoch 11 | Loss: 0.544546 | Recon: 0.496015 | KL: 0.048531
+Epoch 12 | Loss: 0.532679 | Recon: 0.489071 | KL: 0.043607
+Epoch 13 | Loss: 0.530937 | Recon: 0.491069 | KL: 0.039868
+Epoch 14 | Loss: 0.522160 | Recon: 0.485182 | KL: 0.036978
+Epoch 15 | Loss: 0.521289 | Recon: 0.486612 | KL: 0.034677
+Epoch 16 | Loss: 0.516444 | Recon: 0.483695 | KL: 0.032748
+Epoch 17 | Loss: 0.513717 | Recon: 0.482662 | KL: 0.031055
+Epoch 18 | Loss: 0.515214 | Recon: 0.485719 | KL: 0.029495
+Epoch 19 | Loss: 0.510740 | Recon: 0.482730 | KL: 0.028010
+Epoch 20 | Loss: 0.509835 | Recon: 0.483274 | KL: 0.026561
+Epoch 21 | Loss: 0.506365 | Recon: 0.481223 | KL: 0.025141
+Epoch 22 | Loss: 0.502277 | Recon: 0.478545 | KL: 0.023732
+Epoch 23 | Loss: 0.498724 | Recon: 0.476380 | KL: 0.022343
+Epoch 24 | Loss: 0.501959 | Recon: 0.480979 | KL: 0.020980
+Epoch 25 | Loss: 0.498862 | Recon: 0.479211 | KL: 0.019651
+Epoch 26 | Loss: 0.495665 | Recon: 0.477298 | KL: 0.018366
+Epoch 27 | Loss: 0.494544 | Recon: 0.477408 | KL: 0.017135
+Epoch 28 | Loss: 0.491722 | Recon: 0.475764 | KL: 0.015959
+Epoch 29 | Loss: 0.489902 | Recon: 0.475057 | KL: 0.014845
+
+Traceback (most recent call last):
+  File "/Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/VAE.py", line 223, in <module>
+    for i, (vertices, faces, data) in enumerate(train_data):#enumerate(test_data):
+ValueError: not enough values to unpack (expected 3, got 2)
+Traceback (most recent call last):
+  File "/Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/VAE.py", line 223, in <module>
+    for i, (vertices, faces, data) in enumerate(train_data):#enumerate(test_data):
+ValueError: not enough values to unpack (expected 3, got 2)

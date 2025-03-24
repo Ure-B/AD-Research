@@ -1,0 +1,19 @@
+/Users/benjaminkwon/Desktop/ExplainingAnatomicalShapeVariability/venv/lib/python3.10/site-packages/torch_geometric/nn/conv/spline_conv.py:133: UserWarning:
+
+We do not recommend using the non-optimized CPU version of `SplineConv`. If possible, please move your data to GPU.
+Epoch 0 | Loss: 5131.041504 | Recon: 0.568827 | KL: 1026.094482
+Epoch 1 | Loss: 4165.583008 | Recon: 0.561265 | KL: 833.004395
+Epoch 2 | Loss: 3375.678955 | Recon: 0.553152 | KL: 675.025146
+Epoch 3 | Loss: 2733.838135 | Recon: 0.545568 | KL: 546.658508
+Epoch 4 | Loss: 2219.055176 | Recon: 0.538897 | KL: 443.703278
+Epoch 5 | Loss: 1813.262573 | Recon: 0.530838 | KL: 362.546326
+Epoch 6 | Loss: 1499.430054 | Recon: 0.526014 | KL: 299.780823
+Epoch 7 | Loss: 1261.528687 | Recon: 0.520027 | KL: 252.201736
+Epoch 8 | Loss: 1084.719727 | Recon: 0.514392 | KL: 216.841064
+Epoch 9 | Loss: 955.196777 | Recon: 0.512716 | KL: 190.936813
+Epoch 10 | Loss: 860.260254 | Recon: 0.507925 | KL: 171.950470
+Epoch 11 | Loss: 788.904358 | Recon: 0.501968 | KL: 157.680481
+Epoch 12 | Loss: 732.428345 | Recon: 0.505152 | KL: 146.384644
+Epoch 13 | Loss: 684.568481 | Recon: 0.499614 | KL: 136.813766
+Epoch 14 | Loss: 641.309265 | Recon: 0.501184 | KL: 128.161621
+Reconstructed torus saved to: reconstructed_torus_VAE_0.ply

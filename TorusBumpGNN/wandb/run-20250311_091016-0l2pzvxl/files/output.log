@@ -1,0 +1,58 @@
+  0%|          | 0/50 [00:00<?, ?it/s]/Users/benjaminkwon/Desktop/ExplainingAnatomicalShapeVariability/venv/lib/python3.10/site-packages/torch_geometric/nn/conv/spline_conv.py:133: UserWarning:
+
+We do not recommend using the non-optimized CPU version of `SplineConv`. If possible, please move your data to GPU.
+Epoch 0 | Loss: 0.873286 | Recon: 0.872298 | KL: 0.098811
+
+ 64%|██████▍   | 32/50 [26:48<20:22, 67.92s/it]
+Epoch 1 | Loss: 0.868015 | Recon: 0.867124 | KL: 0.089051
+Epoch 2 | Loss: 0.863091 | Recon: 0.861905 | KL: 0.118603
+Epoch 3 | Loss: 0.857871 | Recon: 0.856016 | KL: 0.185536
+Epoch 4 | Loss: 0.851791 | Recon: 0.848837 | KL: 0.295405
+Epoch 5 | Loss: 0.843238 | Recon: 0.838606 | KL: 0.463219
+Epoch 6 | Loss: 0.828513 | Recon: 0.821383 | KL: 0.712960
+Epoch 7 | Loss: 0.808352 | Recon: 0.797576 | KL: 1.077596
+Epoch 8 | Loss: 0.781634 | Recon: 0.765625 | KL: 1.600907
+Epoch 9 | Loss: 0.746396 | Recon: 0.723037 | KL: 2.335937
+Epoch 10 | Loss: 0.710407 | Recon: 0.677166 | KL: 3.324067
+Epoch 11 | Loss: 0.680561 | Recon: 0.635455 | KL: 4.510530
+Epoch 12 | Loss: 0.657737 | Recon: 0.601990 | KL: 5.574749
+Epoch 13 | Loss: 0.624151 | Recon: 0.561049 | KL: 6.310128
+Epoch 14 | Loss: 0.579190 | Recon: 0.510362 | KL: 6.882823
+Epoch 15 | Loss: 0.527203 | Recon: 0.450424 | KL: 7.677867
+Epoch 16 | Loss: 0.487880 | Recon: 0.398680 | KL: 8.919953
+Epoch 17 | Loss: 0.454576 | Recon: 0.350767 | KL: 10.380869
+Epoch 18 | Loss: 0.416906 | Recon: 0.299547 | KL: 11.735898
+Epoch 19 | Loss: 0.381909 | Recon: 0.251077 | KL: 13.083117
+Epoch 20 | Loss: 0.380220 | Recon: 0.237724 | KL: 14.249613
+Epoch 21 | Loss: 0.370875 | Recon: 0.225312 | KL: 14.556302
+Epoch 22 | Loss: 0.340720 | Recon: 0.198206 | KL: 14.251382
+Epoch 23 | Loss: 0.324830 | Recon: 0.185201 | KL: 13.962880
+Epoch 24 | Loss: 0.330893 | Recon: 0.190736 | KL: 14.015655
+Epoch 25 | Loss: 0.332591 | Recon: 0.190088 | KL: 14.250294
+Epoch 26 | Loss: 0.320591 | Recon: 0.175668 | KL: 14.492336
+Epoch 27 | Loss: 0.314319 | Recon: 0.166907 | KL: 14.741216
+Epoch 28 | Loss: 0.312546 | Recon: 0.163672 | KL: 14.887425
+Epoch 29 | Loss: 0.311922 | Recon: 0.164229 | KL: 14.769343
+Epoch 30 | Loss: 0.305186 | Recon: 0.159832 | KL: 14.535430
+Epoch 31 | Loss: 0.303649 | Recon: 0.160289 | KL: 14.336081
+Epoch 32 | Loss: 0.301969 | Recon: 0.159461 | KL: 14.250859
+Epoch 33 | Loss: 0.301089 | Recon: 0.158806 | KL: 14.228298
+Epoch 34 | Loss: 0.299420 | Recon: 0.156660 | KL: 14.275990
+Epoch 35 | Loss: 0.298328 | Recon: 0.154709 | KL: 14.361909
+Epoch 36 | Loss: 0.296823 | Recon: 0.152091 | KL: 14.473223
+Epoch 37 | Loss: 0.295985 | Recon: 0.150636 | KL: 14.534825
+Epoch 38 | Loss: 0.295044 | Recon: 0.149729 | KL: 14.531488
+Epoch 39 | Loss: 0.294880 | Recon: 0.149562 | KL: 14.531811
+Epoch 40 | Loss: 0.294832 | Recon: 0.149169 | KL: 14.566281
+Epoch 41 | Loss: 0.292072 | Recon: 0.145677 | KL: 14.639487
+Epoch 42 | Loss: 0.293080 | Recon: 0.145292 | KL: 14.778877
+Epoch 43 | Loss: 0.292585 | Recon: 0.144078 | KL: 14.850754
+Epoch 44 | Loss: 0.290233 | Recon: 0.142882 | KL: 14.735115
+Epoch 45 | Loss: 0.291463 | Recon: 0.145667 | KL: 14.579551
+Epoch 46 | Loss: 0.287602 | Recon: 0.142141 | KL: 14.546124
+Epoch 47 | Loss: 0.288072 | Recon: 0.142354 | KL: 14.571891
+Epoch 48 | Loss: 0.289062 | Recon: 0.143307 | KL: 14.575512
+Epoch 49 | Loss: 0.287714 | Recon: 0.142665 | KL: 14.504934
+Input range: -2.101945638656616 2.068974256515503
+Output range: -2.2957210540771484 2.181774616241455
+Reconstructed torus saved to: reconstructed_torus_VAE_0.ply

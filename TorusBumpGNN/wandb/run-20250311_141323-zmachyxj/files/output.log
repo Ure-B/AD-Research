@@ -1,0 +1,28 @@
+  0%|          | 0/20 [00:00<?, ?it/s]/Users/benjaminkwon/Desktop/ExplainingAnatomicalShapeVariability/venv/lib/python3.10/site-packages/torch_geometric/nn/conv/spline_conv.py:133: UserWarning:
+
+We do not recommend using the non-optimized CPU version of `SplineConv`. If possible, please move your data to GPU.
+Epoch 0 | Loss: 0.869379 | Recon: 0.869379 | KL: 0.085423 | Beta: 0.000000
+
+100%|██████████| 20/20 [16:27<00:00, 49.35s/it]
+Epoch 1 | Loss: 0.865040 | Recon: 0.863916 | KL: 0.112322 | Beta: 0.010000
+Epoch 2 | Loss: 0.862543 | Recon: 0.859438 | KL: 0.155253 | Beta: 0.020000
+Epoch 3 | Loss: 0.858930 | Recon: 0.852612 | KL: 0.210620 | Beta: 0.030000
+Epoch 4 | Loss: 0.855567 | Recon: 0.844397 | KL: 0.279232 | Beta: 0.040000
+Epoch 5 | Loss: 0.850782 | Recon: 0.832750 | KL: 0.360646 | Beta: 0.050000
+Epoch 6 | Loss: 0.844928 | Recon: 0.818208 | KL: 0.445347 | Beta: 0.060000
+Epoch 7 | Loss: 0.841991 | Recon: 0.805910 | KL: 0.515435 | Beta: 0.070000
+Epoch 8 | Loss: 0.838152 | Recon: 0.793608 | KL: 0.556807 | Beta: 0.080000
+Epoch 9 | Loss: 0.831750 | Recon: 0.780499 | KL: 0.569450 | Beta: 0.090000
+Epoch 10 | Loss: 0.827196 | Recon: 0.770513 | KL: 0.566827 | Beta: 0.100000
+Epoch 11 | Loss: 0.813946 | Recon: 0.756762 | KL: 0.571839 | Beta: 0.100000
+Epoch 12 | Loss: 0.805346 | Recon: 0.741765 | KL: 0.635815 | Beta: 0.100000
+Epoch 13 | Loss: 0.791536 | Recon: 0.715139 | KL: 0.763965 | Beta: 0.100000
+Epoch 14 | Loss: 0.778401 | Recon: 0.684623 | KL: 0.937782 | Beta: 0.100000
+Epoch 15 | Loss: 0.764250 | Recon: 0.653952 | KL: 1.102979 | Beta: 0.100000
+Epoch 16 | Loss: 0.751911 | Recon: 0.628441 | KL: 1.234699 | Beta: 0.100000
+Epoch 17 | Loss: 0.742950 | Recon: 0.610318 | KL: 1.326316 | Beta: 0.100000
+Epoch 18 | Loss: 0.740422 | Recon: 0.602168 | KL: 1.382538 | Beta: 0.100000
+Epoch 19 | Loss: 0.735453 | Recon: 0.591370 | KL: 1.440829 | Beta: 0.100000
+Input range: -2.101945638656616 2.068974256515503
+Output range: -2.246891975402832 2.909989356994629
+Reconstructed torus saved to: reconstructed_torus_VAE_0.ply

@@ -1,0 +1,18 @@
+  0%|          | 0/60 [00:00<?, ?it/s]/Users/benjaminkwon/Desktop/ExplainingAnatomicalShapeVariability/venv/lib/python3.10/site-packages/torch_geometric/nn/conv/spline_conv.py:133: UserWarning:
+
+We do not recommend using the non-optimized CPU version of `SplineConv`. If possible, please move your data to GPU.
+Epoch 0 | Loss: 0.873795 | Recon: 0.873795 | KL: 0.187972 | Beta: 0.000000
+
+ 22%|██▏       | 13/60 [12:34<44:51, 57.28s/it]
+Epoch 1 | Loss: 0.882483 | Recon: 0.865522 | KL: 0.169602 | Beta: 0.100000
+Epoch 2 | Loss: 0.879455 | Recon: 0.862091 | KL: 0.086823 | Beta: 0.200000
+Epoch 3 | Loss: 0.874604 | Recon: 0.862283 | KL: 0.041070 | Beta: 0.300000
+Epoch 4 | Loss: 0.873757 | Recon: 0.864876 | KL: 0.022204 | Beta: 0.400000
+Epoch 5 | Loss: 0.873107 | Recon: 0.866663 | KL: 0.012887 | Beta: 0.500000
+Epoch 6 | Loss: 0.872909 | Recon: 0.868186 | KL: 0.007870 | Beta: 0.600000
+Epoch 7 | Loss: 0.873313 | Recon: 0.869461 | KL: 0.005502 | Beta: 0.700000
+Epoch 8 | Loss: 0.871777 | Recon: 0.868466 | KL: 0.004139 | Beta: 0.800000
+Epoch 9 | Loss: 0.872410 | Recon: 0.869565 | KL: 0.003161 | Beta: 0.900000
+Epoch 10 | Loss: 0.872170 | Recon: 0.869710 | KL: 0.002460 | Beta: 1.000000
+Epoch 11 | Loss: 0.871171 | Recon: 0.869260 | KL: 0.001911 | Beta: 1.000000
+Epoch 12 | Loss: 0.871290 | Recon: 0.869786 | KL: 0.001503 | Beta: 1.000000

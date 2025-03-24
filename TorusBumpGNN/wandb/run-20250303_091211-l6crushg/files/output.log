@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/VAE.py", line 219, in <module>
+    train_vae(model, train_data, optimizer, epochs=config.epochs, beta=config.beta)
+  File "/Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/VAE.py", line 139, in train_vae
+    recon_x, mu, logvar = model(data.x, data.edge_index)
+AttributeError: 'str' object has no attribute 'x'
+Traceback (most recent call last):
+  File "/Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/VAE.py", line 219, in <module>
+    train_vae(model, train_data, optimizer, epochs=config.epochs, beta=config.beta)
+  File "/Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/VAE.py", line 139, in train_vae
+    recon_x, mu, logvar = model(data.x, data.edge_index)
+AttributeError: 'str' object has no attribute 'x'

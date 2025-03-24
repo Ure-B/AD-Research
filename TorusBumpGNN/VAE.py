@@ -12,6 +12,9 @@ from torch_geometric.nn import knn_graph
 ############################
 # Using GPU
 ############################
+############################
+# Using GPU
+############################
 def load_ply(filepath):
     """
     Loads .ply file using trimesh and returns vertices, faces, and features
@@ -55,6 +58,7 @@ class GraphVAE(torch.nn.Module):
         # Encoder
         self.conv1 = SplineConv(in_channels, hidden_dim, dim=3, kernel_size=kernel_size)
         self.conv2 = SplineConv(hidden_dim, hidden_dim, dim=3, kernel_size=kernel_size)
+        self.conv2 = SplineConv(hidden_dim, hidden_dim, dim=3, kernel_size=kernel_size)
         self.conv3 = SplineConv(hidden_dim, 2 * latent_dim, dim=3, kernel_size=kernel_size)
 
         # Decoder
@@ -74,7 +78,14 @@ class GraphVAE(torch.nn.Module):
         pseudo_min = pseudo.min(dim=0, keepdim=True)[0]
         pseudo_max = pseudo.max(dim=0, keepdim=True)[0]
         pseudo = (pseudo - pseudo_min) / (pseudo_max - pseudo_min + 1e-8)
+        row, col = edge_index
+        pseudo = x[row] - x[col]
+        pseudo_min = pseudo.min(dim=0, keepdim=True)[0]
+        pseudo_max = pseudo.max(dim=0, keepdim=True)[0]
+        pseudo = (pseudo - pseudo_min) / (pseudo_max - pseudo_min + 1e-8)
 
+        h = F.leaky_relu(self.conv1(x, edge_index, pseudo))
+        h = F.leaky_relu(self.conv2(h, edge_index, pseudo))
         h = F.leaky_relu(self.conv1(x, edge_index, pseudo))
         h = F.leaky_relu(self.conv2(h, edge_index, pseudo))
         h = self.conv3(h, edge_index, pseudo)
@@ -94,6 +105,8 @@ class GraphVAE(torch.nn.Module):
 
     def decode(self, z):
         """Decode to reconstruct original shape"""
+        h = F.leaky_relu(self.decoder_fc1(z))
+        h = F.leaky_relu(self.decoder_fc2(h))
         h = F.leaky_relu(self.decoder_fc1(z))
         h = F.leaky_relu(self.decoder_fc2(h))
         return self.decoder_fc3(h)
@@ -117,8 +130,11 @@ def save_ply(faces, reconstructed_features, mean, std, filename):
     print(f"Reconstructed torus saved to: {filename}")
 
 def train_vae(model, train_data, optimizer, epochs=50, beta=1.0, device="cpu"):
+def train_vae(model, train_data, optimizer, epochs=50, beta=1.0, device="cpu"):
     model.train()
     for epoch in tqdm(range(epochs)):
+
+
 
 
         total_loss = 0.0
@@ -127,14 +143,22 @@ def train_vae(model, train_data, optimizer, epochs=50, beta=1.0, device="cpu"):
 
         for data in train_data:
             data = data.to(device)  # Move data to GPU
+            data = data.to(device)  # Move data to GPU
             optimizer.zero_grad()
             recon_x, mu, logvar = model(data.x, data.edge_index)
 
             # Reconstruction loss
             #recon_loss = F.l1_loss(recon_x, data.x)
+            #recon_loss = F.l1_loss(recon_x, data.x)
             recon_loss = F.mse_loss(recon_x, data.x)
             # recon_loss = 0.5 * F.l1_loss(recon_x, data.x) + 0.5 * F.mse_loss(recon_x, data.x)
+            # recon_loss = 0.5 * F.l1_loss(recon_x, data.x) + 0.5 * F.mse_loss(recon_x, data.x)
 
+            # KL Divergence calculation
+            kl_loss = torch.mean(
+                -0.5 * torch.sum(1 + logvar - mu ** 2 - logvar.exp(), dim=1),
+                dim=0
+            )
             # KL Divergence calculation
             kl_loss = torch.mean(
                 -0.5 * torch.sum(1 + logvar - mu ** 2 - logvar.exp(), dim=1),
@@ -153,6 +177,10 @@ def train_vae(model, train_data, optimizer, epochs=50, beta=1.0, device="cpu"):
         avg_recon_loss = total_recon_loss / len(train_data)
         avg_kl_loss = total_kl_loss / len(train_data)
 
+        print(
+            f"Epoch {epoch} | Loss: {avg_loss:.6f} | Recon: {avg_recon_loss:.6f} | "
+            f"KL: {avg_kl_loss:.6f}"
+        )
         print(
             f"Epoch {epoch} | Loss: {avg_loss:.6f} | Recon: {avg_recon_loss:.6f} | "
             f"KL: {avg_kl_loss:.6f}"
@@ -183,8 +211,12 @@ if __name__ == "__main__":
     config.epochs = 100
     config.beta = 0.0001
     config.learning_rate = 0.001
-    config.hidden_dim = 64
+    config.hidden_dim = 128
     config.latent_dim = 16
+
+    # Set device to GPU if available
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print("Using device:", device)
 
     # Set device to GPU if available
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -223,6 +255,8 @@ if __name__ == "__main__":
 
     # Train VAE on GPU
     train_vae(model, train_data, optimizer, epochs=config.epochs, beta=config.beta, device=device)
+    # Train VAE on GPU
+    train_vae(model, train_data, optimizer, epochs=config.epochs, beta=config.beta, device=device)
 
     # Testing / Reconstruction
     model.eval()
@@ -234,6 +268,10 @@ if __name__ == "__main__":
             print("Input range:", data.x.min().item(), data.x.max().item())
             print("Output range:", recon_x.min().item(), recon_x.max().item())
 
+            print("Input range:", data.x.min().item(), data.x.max().item())
+            print("Output range:", recon_x.min().item(), recon_x.max().item())
+
+            reconstructed_features = recon_x.cpu().numpy()  # Move back to CPU for saving
             reconstructed_features = recon_x.cpu().numpy()  # Move back to CPU for saving
             output_filename = f"reconstructed_torus_VAE_{i}.ply"
             save_ply(faces, reconstructed_features, mean, std, output_filename)

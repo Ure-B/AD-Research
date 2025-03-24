@@ -1,0 +1,40 @@
+2025-03-01 18:01:05,895 INFO    MainThread:70023 [wandb_setup.py:_flush():67] Current SDK version is 0.19.7
+2025-03-01 18:01:05,896 INFO    MainThread:70023 [wandb_setup.py:_flush():67] Configure stats pid to 70023
+2025-03-01 18:01:05,896 INFO    MainThread:70023 [wandb_setup.py:_flush():67] Loading settings from /Users/benjaminkwon/.config/wandb/settings
+2025-03-01 18:01:05,896 INFO    MainThread:70023 [wandb_setup.py:_flush():67] Loading settings from /Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/wandb/settings
+2025-03-01 18:01:05,896 INFO    MainThread:70023 [wandb_setup.py:_flush():67] Loading settings from environment variables
+2025-03-01 18:01:05,896 INFO    MainThread:70023 [wandb_init.py:setup_run_log_directory():647] Logging user logs to /Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/wandb/run-20250301_180105-cy36v5on/logs/debug.log
+2025-03-01 18:01:05,897 INFO    MainThread:70023 [wandb_init.py:setup_run_log_directory():648] Logging internal logs to /Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/wandb/run-20250301_180105-cy36v5on/logs/debug-internal.log
+2025-03-01 18:01:05,897 INFO    MainThread:70023 [wandb_init.py:init():761] calling init triggers
+2025-03-01 18:01:05,897 INFO    MainThread:70023 [wandb_init.py:init():766] wandb.init called with sweep_config: {}
+config: {'_wandb': {}}
+2025-03-01 18:01:05,897 INFO    MainThread:70023 [wandb_init.py:init():784] starting backend
+2025-03-01 18:01:05,897 INFO    MainThread:70023 [wandb_init.py:init():788] sending inform_init request
+2025-03-01 18:01:05,985 INFO    MainThread:70023 [backend.py:_multiprocessing_setup():97] multiprocessing start_methods=spawn,fork,forkserver, using: spawn
+2025-03-01 18:01:05,986 INFO    MainThread:70023 [wandb_init.py:init():803] backend started and connected
+2025-03-01 18:01:05,994 INFO    MainThread:70023 [wandb_init.py:init():896] updated telemetry
+2025-03-01 18:01:06,027 INFO    MainThread:70023 [wandb_init.py:init():920] communicating run to backend with 90.0 second timeout
+2025-03-01 18:01:07,009 INFO    MainThread:70023 [wandb_init.py:init():995] starting run threads in backend
+2025-03-01 18:01:07,268 INFO    MainThread:70023 [wandb_run.py:_console_start():2377] atexit reg
+2025-03-01 18:01:07,268 INFO    MainThread:70023 [wandb_run.py:_redirect():2227] redirect: wrap_raw
+2025-03-01 18:01:07,269 INFO    MainThread:70023 [wandb_run.py:_redirect():2292] Wrapping output streams.
+2025-03-01 18:01:07,269 INFO    MainThread:70023 [wandb_run.py:_redirect():2317] Redirects installed.
+2025-03-01 18:01:07,272 INFO    MainThread:70023 [wandb_init.py:init():1037] run started, returning control to user process
+2025-03-01 18:01:07,272 INFO    MainThread:70023 [wandb_config.py:__setitem__():154] config set epochs = 15 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x193c87400>>
+2025-03-01 18:01:07,273 INFO    MainThread:70023 [wandb_run.py:_config_callback():1261] config_cb epochs 15 None
+2025-03-01 18:01:07,273 INFO    MainThread:70023 [wandb_config.py:__setitem__():154] config set beta = 5.0 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x193c87400>>
+2025-03-01 18:01:07,273 INFO    MainThread:70023 [wandb_run.py:_config_callback():1261] config_cb beta 5.0 None
+2025-03-01 18:01:07,273 INFO    MainThread:70023 [wandb_config.py:__setitem__():154] config set learning_rate = 0.001 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x193c87400>>
+2025-03-01 18:01:07,273 INFO    MainThread:70023 [wandb_run.py:_config_callback():1261] config_cb learning_rate 0.001 None
+2025-03-01 18:01:07,273 INFO    MainThread:70023 [wandb_config.py:__setitem__():154] config set hidden_dim = 64 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x193c87400>>
+2025-03-01 18:01:07,273 INFO    MainThread:70023 [wandb_run.py:_config_callback():1261] config_cb hidden_dim 64 None
+2025-03-01 18:01:07,273 INFO    MainThread:70023 [wandb_config.py:__setitem__():154] config set latent_dim = 16 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x193c87400>>
+2025-03-01 18:01:07,273 INFO    MainThread:70023 [wandb_run.py:_config_callback():1261] config_cb latent_dim 16 None
+2025-03-01 18:04:04,747 INFO    MainThread:70023 [wandb_run.py:_finish():2112] finishing run tapflow-inc/VAE/cy36v5on
+2025-03-01 18:04:04,748 INFO    MainThread:70023 [wandb_run.py:_atexit_cleanup():2342] got exitcode: 0
+2025-03-01 18:04:04,748 INFO    MainThread:70023 [wandb_run.py:_restore():2324] restore
+2025-03-01 18:04:04,748 INFO    MainThread:70023 [wandb_run.py:_restore():2330] restore done
+2025-03-01 18:04:07,288 INFO    MsgRouterThr:70023 [mailbox.py:close():115] Closing mailbox, abandoning 1 handles.
+2025-03-01 18:04:07,291 INFO    MainThread:70023 [wandb_run.py:_footer_history_summary_info():3958] rendering history
+2025-03-01 18:04:07,292 INFO    MainThread:70023 [wandb_run.py:_footer_history_summary_info():3990] rendering summary
+2025-03-01 18:04:07,294 INFO    MainThread:70023 [wandb_run.py:_footer_sync_info():3919] logging synced files

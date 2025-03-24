@@ -1,0 +1,16 @@
+{
+  "os":  "macOS-13.3.1-x86_64-i386-64bit",
+  "python":  "CPython 3.10.16",
+  "startedAt":  "2025-03-03T17:44:03.317160Z",
+  "program":  "/Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/VAE.py",
+  "codePath":  "TorusBumpGNN/VAE.py",
+  "git":  {
+    "remote":  "https://github.com/Ure-B/AD-Research.git",
+    "commit":  "c7bc0da4b03c78eb39595a55d1636aac9b2a0ec3"
+  },
+  "email":  "kwonb2@mymacewan.ca",
+  "root":  "/Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN",
+  "host":  "Benjis-MacAir-M2.local",
+  "executable":  "/Users/benjaminkwon/Desktop/ExplainingAnatomicalShapeVariability/venv/bin/python",
+  "codePathLocal":  "VAE.py"
+}

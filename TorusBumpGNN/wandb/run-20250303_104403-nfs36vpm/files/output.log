@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/VAE.py", line 179, in <module>
+    train_data.append(vertices, create_graph(vertices, features, k=16))
+TypeError: list.append() takes exactly one argument (2 given)
+Traceback (most recent call last):
+  File "/Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/VAE.py", line 179, in <module>
+    train_data.append(vertices, create_graph(vertices, features, k=16))
+TypeError: list.append() takes exactly one argument (2 given)

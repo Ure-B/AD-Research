@@ -1,0 +1,33 @@
+  0%|          | 0/50 [00:00<?, ?it/s]/Users/benjaminkwon/Desktop/ExplainingAnatomicalShapeVariability/venv/lib/python3.10/site-packages/torch_geometric/nn/conv/spline_conv.py:133: UserWarning:
+
+We do not recommend using the non-optimized CPU version of `SplineConv`. If possible, please move your data to GPU.
+
+  0%|          | 0/50 [01:38<?, ?it/s]
+Traceback (most recent call last):
+  File "/Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/VAE.py", line 203, in <module>
+    train_vae(model, train_data, optimizer, epochs=config.epochs, beta=config.beta)
+  File "/Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/VAE.py", line 125, in train_vae
+    recon_x, mu, logvar = model(data.x, data.edge_index)
+  File "/Users/benjaminkwon/Desktop/ExplainingAnatomicalShapeVariability/venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/Users/benjaminkwon/Desktop/ExplainingAnatomicalShapeVariability/venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/VAE.py", line 101, in forward
+    z = self.reparameterize(mu, logvar)
+  File "/Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/VAE.py", line 88, in reparameterize
+    return mu + eps * std
+RuntimeError: The size of tensor a (32) must match the size of tensor b (96) at non-singleton dimension 1
+Traceback (most recent call last):
+  File "/Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/VAE.py", line 203, in <module>
+    train_vae(model, train_data, optimizer, epochs=config.epochs, beta=config.beta)
+  File "/Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/VAE.py", line 125, in train_vae
+    recon_x, mu, logvar = model(data.x, data.edge_index)
+  File "/Users/benjaminkwon/Desktop/ExplainingAnatomicalShapeVariability/venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/Users/benjaminkwon/Desktop/ExplainingAnatomicalShapeVariability/venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/VAE.py", line 101, in forward
+    z = self.reparameterize(mu, logvar)
+  File "/Users/benjaminkwon/Desktop/AD-Research/TorusBumpGNN/VAE.py", line 88, in reparameterize
+    return mu + eps * std
+RuntimeError: The size of tensor a (32) must match the size of tensor b (96) at non-singleton dimension 1
