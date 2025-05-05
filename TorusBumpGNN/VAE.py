@@ -50,7 +50,7 @@ class GraphVAE(torch.nn.Module):
     Graph VAE using SplineConv layers.
     """
 
-    def __init__(self, in_channels, hidden_dim, latent_dim, kernel_size=2):
+    def __init__(self, in_channels, hidden_dim, latent_dim, kernel_size):
         super(GraphVAE, self).__init__()
         # Encoder
         self.conv1 = SplineConv(in_channels, hidden_dim, dim=3, kernel_size=kernel_size)
@@ -59,8 +59,8 @@ class GraphVAE(torch.nn.Module):
 
         # Decoder
         self.decoder_fc1 = torch.nn.Linear(latent_dim, hidden_dim)
-        self.decoder_fc2 = torch.nn.Linear(hidden_dim, hidden_dim)
-        self.decoder_fc3 = torch.nn.Linear(hidden_dim, in_channels)
+        self.deconv1 = SplineConv(hidden_dim, hidden_dim, dim=3, kernel_size=kernel_size)
+        self.deconv2 = SplineConv(hidden_dim, in_channels, dim=3, kernel_size=kernel_size)
 
         self.latent_dim = latent_dim
 
@@ -68,12 +68,9 @@ class GraphVAE(torch.nn.Module):
         """
         Creates mean (mu) and log-variance (logvar)
         """
-        device = x.device
         row, col = edge_index
         pseudo = x[row] - x[col]
-        pseudo_min = pseudo.min(dim=0, keepdim=True)[0]
-        pseudo_max = pseudo.max(dim=0, keepdim=True)[0]
-        pseudo = (pseudo - pseudo_min) / (pseudo_max - pseudo_min + 1e-8)
+        pseudo = self._normalize_pseudo(pseudo)
 
         h = F.leaky_relu(self.conv1(x, edge_index, pseudo))
         h = F.leaky_relu(self.conv2(h, edge_index, pseudo))
@@ -92,11 +89,11 @@ class GraphVAE(torch.nn.Module):
         eps = torch.randn_like(std)
         return mu + eps * std
 
-    def decode(self, z):
+    def decode(self, z, edge_index, pseudo):
         """Decode to reconstruct original shape"""
         h = F.leaky_relu(self.decoder_fc1(z))
-        h = F.leaky_relu(self.decoder_fc2(h))
-        return self.decoder_fc3(h)
+        h = F.leaky_relu(self.deconv1(h, edge_index, pseudo))
+        return self.deconv2(h, edge_index, pseudo)
 
     def forward(self, x, edge_index):
         """
@@ -104,8 +101,19 @@ class GraphVAE(torch.nn.Module):
         """
         mu, logvar = self.encode(x, edge_index)
         z = self.reparameterize(mu, logvar)
-        recon_x = self.decode(z)
+        row, col = edge_index
+        pseudo = x[row] - x[col]
+        pseudo = self._normalize_pseudo(pseudo)
+        recon_x = self.decode(z, edge_index, pseudo)
         return recon_x, mu, logvar
+
+    def _normalize_pseudo(self, pseudo):
+        """
+        Normalize pseudo coordinates to [0, 1] for spline kernel input
+        """
+        pseudo_min = pseudo.min(dim=0, keepdim=True)[0]
+        pseudo_max = pseudo.max(dim=0, keepdim=True)[0]
+        return (pseudo - pseudo_min) / (pseudo_max - pseudo_min + 1e-8)
 
 def save_ply(faces, reconstructed_features, mean, std, filename):
     """
@@ -182,7 +190,7 @@ if __name__ == "__main__":
     config.epochs = 100
     config.beta = 0.0001
     config.learning_rate = 0.001
-    config.hidden_dim = 128
+    config.hidden_dim = 64
     config.latent_dim = 16
 
     # Set device to GPU if available
@@ -193,7 +201,7 @@ if __name__ == "__main__":
     test_dir = "testing_data"
 
     # Number of files to use
-    num_of_training_data = 40
+    num_of_training_data = 100
     num_of_testing_data = 4
 
     train_files = sorted(os.listdir(train_dir))[:num_of_training_data]
@@ -215,7 +223,7 @@ if __name__ == "__main__":
         in_channels=3,
         hidden_dim=config.hidden_dim,
         latent_dim=config.latent_dim,
-        kernel_size=2
+        kernel_size=3
     ).to(device)  # Move model to GPU
 
     optimizer = torch.optim.Adam(model.parameters(), lr=config.learning_rate, weight_decay=0)

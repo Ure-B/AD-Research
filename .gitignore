@@ -1,2 +1,4 @@
 TorusBumpGNN/synthetic-data/sdf
 TorusColorGNN/synthetic-data/sdf
+
+*.ply
