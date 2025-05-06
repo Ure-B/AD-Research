@@ -9,9 +9,6 @@ import os
 # import wandb
 from torch_geometric.nn import knn_graph
 
-############################
-# Using GPU
-############################
 def load_ply(filepath):
     """
     Loads .ply file using trimesh and returns vertices, faces, and features
@@ -187,7 +184,7 @@ if __name__ == "__main__":
             self.latent_dim = 16
     
     config = Config()
-    config.epochs = 100
+    config.epochs = 200
     config.beta = 0.0001
     config.learning_rate = 0.001
     config.hidden_dim = 64
@@ -223,7 +220,7 @@ if __name__ == "__main__":
         in_channels=3,
         hidden_dim=config.hidden_dim,
         latent_dim=config.latent_dim,
-        kernel_size=3
+        kernel_size=2
     ).to(device)  # Move model to GPU
 
     optimizer = torch.optim.Adam(model.parameters(), lr=config.learning_rate, weight_decay=0)
@@ -244,5 +241,5 @@ if __name__ == "__main__":
             reconstructed_features = recon_x.cpu().numpy()  # Move back to CPU for saving
             output_filename = f"reconstructed_torus_VAE_{i}.ply"
             save_ply(faces, reconstructed_features, mean, std, output_filename)
-
+    
     #wandb.finish()

@@ -9,9 +9,6 @@ import os
 # import wandb
 from torch_geometric.nn import knn_graph
 
-############################
-# Using GPU
-############################
 def load_ply(filepath):
     """
     Loads .ply file using trimesh and returns vertices, faces, and features
@@ -50,7 +47,7 @@ class GraphVAE(torch.nn.Module):
     Graph VAE using SplineConv layers.
     """
 
-    def __init__(self, in_channels, hidden_dim, latent_dim, kernel_size=2):
+    def __init__(self, in_channels, hidden_dim, latent_dim, kernel_size):
         super(GraphVAE, self).__init__()
         # Encoder
         self.conv1 = SplineConv(in_channels, hidden_dim, dim=3, kernel_size=kernel_size)
@@ -59,8 +56,8 @@ class GraphVAE(torch.nn.Module):
 
         # Decoder
         self.decoder_fc1 = torch.nn.Linear(latent_dim, hidden_dim)
-        self.decoder_fc2 = torch.nn.Linear(hidden_dim, hidden_dim)
-        self.decoder_fc3 = torch.nn.Linear(hidden_dim, in_channels)
+        self.deconv1 = SplineConv(hidden_dim, hidden_dim, dim=3, kernel_size=kernel_size)
+        self.deconv2 = SplineConv(hidden_dim, in_channels, dim=3, kernel_size=kernel_size)
 
         self.latent_dim = latent_dim
 
@@ -68,12 +65,9 @@ class GraphVAE(torch.nn.Module):
         """
         Creates mean (mu) and log-variance (logvar)
         """
-        device = x.device
         row, col = edge_index
         pseudo = x[row] - x[col]
-        pseudo_min = pseudo.min(dim=0, keepdim=True)[0]
-        pseudo_max = pseudo.max(dim=0, keepdim=True)[0]
-        pseudo = (pseudo - pseudo_min) / (pseudo_max - pseudo_min + 1e-8)
+        pseudo = self._normalize_pseudo(pseudo)
 
         h = F.leaky_relu(self.conv1(x, edge_index, pseudo))
         h = F.leaky_relu(self.conv2(h, edge_index, pseudo))
@@ -92,11 +86,11 @@ class GraphVAE(torch.nn.Module):
         eps = torch.randn_like(std)
         return mu + eps * std
 
-    def decode(self, z):
+    def decode(self, z, edge_index, pseudo):
         """Decode to reconstruct original shape"""
         h = F.leaky_relu(self.decoder_fc1(z))
-        h = F.leaky_relu(self.decoder_fc2(h))
-        return self.decoder_fc3(h)
+        h = F.leaky_relu(self.deconv1(h, edge_index, pseudo))
+        return self.deconv2(h, edge_index, pseudo)
 
     def forward(self, x, edge_index):
         """
@@ -104,8 +98,19 @@ class GraphVAE(torch.nn.Module):
         """
         mu, logvar = self.encode(x, edge_index)
         z = self.reparameterize(mu, logvar)
-        recon_x = self.decode(z)
+        row, col = edge_index
+        pseudo = x[row] - x[col]
+        pseudo = self._normalize_pseudo(pseudo)
+        recon_x = self.decode(z, edge_index, pseudo)
         return recon_x, mu, logvar
+
+    def _normalize_pseudo(self, pseudo):
+        """
+        Normalize pseudo coordinates to [0, 1] for spline kernel input
+        """
+        pseudo_min = pseudo.min(dim=0, keepdim=True)[0]
+        pseudo_max = pseudo.max(dim=0, keepdim=True)[0]
+        return (pseudo - pseudo_min) / (pseudo_max - pseudo_min + 1e-8)
 
 def save_ply(faces, reconstructed_features, mean, std, filename):
     """
@@ -189,11 +194,11 @@ if __name__ == "__main__":
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print("Using device:", device)
 
-    train_dir = "training_data"
+    train_dir = "better_training_data"
     test_dir = "testing_data"
 
     # Number of files to use
-    num_of_training_data = 10
+    num_of_training_data = 100
     num_of_testing_data = 4
 
     train_files = sorted(os.listdir(train_dir))[:num_of_training_data]
@@ -226,25 +231,22 @@ if __name__ == "__main__":
     # Testing / Reconstruction
     model.eval()
     with torch.no_grad():
-        for i, (vertices, faces, mean, std, data) in enumerate(test_data):
-            data = data.to(device)  # Move test data to GPU
-            recon_x, mu, logvar = model(data.x, data.edge_index)
+        # Mesh generation from latent space
+        print("Generating a new mesh from latent space...")
+        template_vertices, template_faces, template_features, mean, std = load_ply(os.path.join(test_dir, test_files[0]))
+        template_graph = create_graph(template_vertices, template_features, k=16).to(device)
 
-            print("Input range:", data.x.min().item(), data.x.max().item())
-            print("Output range:", recon_x.min().item(), recon_x.max().item())
+        num_nodes = template_graph.x.shape[0]
+        z = torch.randn((num_nodes, model.latent_dim)).to(device)
 
-            reconstructed_features = recon_x.cpu().numpy()  # Move back to CPU for saving
-            output_filename = f"reconstructed_torus_VAE_{i}.ply"
-            save_ply(faces, reconstructed_features, mean, std, output_filename)
+        row, col = template_graph.edge_index
+        pseudo = template_graph.x[row] - template_graph.x[col]
+        pseudo = model._normalize_pseudo(pseudo)
 
-    # Generation
-    template_vertices, template_faces, _, mean, std = load_ply("torus_template.ply")
-    num_vertices = template_vertices.shape[0]
+        generated_features = model.decode(z, template_graph.edge_index, pseudo)
+        generated_features = generated_features.cpu().numpy()
 
-    model.eval()
-    with torch.no_grad():
-        z_sample = torch.randn((num_vertices, model.latent_dim)).to(device)
-        generated_features = model.decode(z_sample).cpu().numpy()
-        save_ply(template_faces, generated_features, mean, std, "generated_torus_VAE.ply")
+        output_gen_filename = "generated_torus_from_latent.ply"
+        save_ply(template_faces, generated_features, mean, std, output_gen_filename)
 
     #wandb.finish()
