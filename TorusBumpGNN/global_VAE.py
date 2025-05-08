@@ -1,13 +1,12 @@
 import torch
 import torch.nn.functional as F
-from torch_geometric.nn import SplineConv
+from torch_geometric.nn import SplineConv, knn_graph, global_mean_pool
 from torch_geometric.data import Data
 import trimesh
 import numpy as np
 from tqdm import tqdm
 import os
 # import wandb
-from torch_geometric.nn import knn_graph
 
 def load_ply(filepath):
     """
@@ -41,7 +40,6 @@ def create_graph(vertices, features, k=16):
     edge_index = knn_graph(x, k=k, batch=None, loop=False)
     return Data(x=x, edge_index=edge_index)
 
-
 class GraphVAE(torch.nn.Module):
     """
     Graph VAE using SplineConv layers.
@@ -54,12 +52,14 @@ class GraphVAE(torch.nn.Module):
         self.conv2 = SplineConv(hidden_dim, hidden_dim, dim=3, kernel_size=kernel_size)
         self.conv3 = SplineConv(hidden_dim, 2 * latent_dim, dim=3, kernel_size=kernel_size)
 
-        # Decoder
-        self.decoder_fc1 = torch.nn.Linear(latent_dim, hidden_dim)
+        # Decoder (updated to accept x + z)
+        self.decoder_fc1 = torch.nn.Linear(in_channels + latent_dim, hidden_dim)
+        self.decoder_fc2 = torch.nn.Linear(hidden_dim, hidden_dim)
         self.deconv1 = SplineConv(hidden_dim, hidden_dim, dim=3, kernel_size=kernel_size)
         self.deconv2 = SplineConv(hidden_dim, in_channels, dim=3, kernel_size=kernel_size)
 
         self.latent_dim = latent_dim
+        self.in_channels = in_channels
 
     def encode(self, x, edge_index):
         """
@@ -72,8 +72,11 @@ class GraphVAE(torch.nn.Module):
         h = F.leaky_relu(self.conv1(x, edge_index, pseudo))
         h = F.leaky_relu(self.conv2(h, edge_index, pseudo))
         h = self.conv3(h, edge_index, pseudo)
-        mu = h[:, :self.latent_dim]
-        logvar = h[:, self.latent_dim:]
+
+        # Global mean pooling for latent space
+        batch = torch.zeros(x.size(0), dtype=torch.long, device=x.device)
+        mu = global_mean_pool(h[:, :self.latent_dim], batch)
+        logvar = global_mean_pool(h[:, self.latent_dim:], batch)
         return mu, logvar
 
     def reparameterize(self, mu, logvar):
@@ -86,9 +89,15 @@ class GraphVAE(torch.nn.Module):
         eps = torch.randn_like(std)
         return mu + eps * std
 
-    def decode(self, z, edge_index, pseudo):
-        """Decode to reconstruct original shape"""
-        h = F.leaky_relu(self.decoder_fc1(z))
+    def decode(self, z, edge_index, pseudo, x):
+        """
+        Decode to reconstruct original shape.
+        Includes original x as positional input to guide decoder.
+        """
+        z_expanded = z.expand(x.size(0), -1)
+        decoder_input = torch.cat([x, z_expanded], dim=1)
+        h = F.leaky_relu(self.decoder_fc1(decoder_input))
+        h = F.leaky_relu(self.decoder_fc2(h))
         h = F.leaky_relu(self.deconv1(h, edge_index, pseudo))
         return self.deconv2(h, edge_index, pseudo)
 
@@ -98,10 +107,12 @@ class GraphVAE(torch.nn.Module):
         """
         mu, logvar = self.encode(x, edge_index)
         z = self.reparameterize(mu, logvar)
+
         row, col = edge_index
         pseudo = x[row] - x[col]
         pseudo = self._normalize_pseudo(pseudo)
-        recon_x = self.decode(z, edge_index, pseudo)
+
+        recon_x = self.decode(z, edge_index, pseudo, x)
         return recon_x, mu, logvar
 
     def _normalize_pseudo(self, pseudo):
@@ -135,15 +146,10 @@ def train_vae(model, train_data, optimizer, epochs=50, beta=1.0, device="cpu"):
             recon_x, mu, logvar = model(data.x, data.edge_index)
 
             # Reconstruction loss
-            #recon_loss = F.l1_loss(recon_x, data.x)
             recon_loss = F.mse_loss(recon_x, data.x)
-            # recon_loss = 0.5 * F.l1_loss(recon_x, data.x) + 0.5 * F.mse_loss(recon_x, data.x)
 
-            # KL Divergence calculation
-            kl_loss = torch.mean(
-                -0.5 * torch.sum(1 + logvar - mu ** 2 - logvar.exp(), dim=1),
-                dim=0
-            )
+            # --- UPDATED: KL divergence for global latent vector ---
+            kl_loss = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
 
             loss = recon_loss + beta * kl_loss
             loss.backward()
@@ -170,11 +176,7 @@ def train_vae(model, train_data, optimizer, epochs=50, beta=1.0, device="cpu"):
         # })
 
 if __name__ == "__main__":
-    # Initialize wandb run
-    # wandb.init(project='VAE')
-
-    #config = wandb.config
-
+    # Simple config class
     class Config():
         def __init__(self):
             self.epochs = 100
@@ -184,7 +186,7 @@ if __name__ == "__main__":
             self.latent_dim = 16
     
     config = Config()
-    config.epochs = 100
+    config.epochs = 10
     config.beta = 0.0001
     config.learning_rate = 0.001
     config.hidden_dim = 64
@@ -231,22 +233,31 @@ if __name__ == "__main__":
     # Testing / Reconstruction
     model.eval()
     with torch.no_grad():
-        # Mesh generation from latent space
-        print("Generating a new mesh from latent space...")
-        template_vertices, template_faces, template_features, mean, std = load_ply(os.path.join(test_dir, test_files[0]))
-        template_graph = create_graph(template_vertices, template_features, k=16).to(device)
+        for i, (vertices, faces, mean, std, data) in enumerate(test_data):
+            data = data.to(device)  # Move test data to GPU
+            recon_x, mu, logvar = model(data.x, data.edge_index)
 
-        num_nodes = template_graph.x.shape[0]
-        z = torch.randn((num_nodes, model.latent_dim)).to(device)
+            print("Input range:", data.x.min().item(), data.x.max().item())
+            print("Output range:", recon_x.min().item(), recon_x.max().item())
 
-        row, col = template_graph.edge_index
-        pseudo = template_graph.x[row] - template_graph.x[col]
-        pseudo = model._normalize_pseudo(pseudo)
+            reconstructed_features = recon_x.cpu().numpy()  # Move back to CPU for saving
+            output_filename = f"reconstructed_torus_global_VAE_{i}.ply"
+            save_ply(faces, reconstructed_features, mean, std, output_filename)
+    
+    # Generation
+    _, faces, mean, std, data = test_data[0]
+    data = data.to(device)
 
-        generated_features = model.decode(z, template_graph.edge_index, pseudo)
-        generated_features = generated_features.cpu().numpy()
+    row, col = data.edge_index
+    pseudo = data.x[row] - data.x[col]
+    pseudo = model._normalize_pseudo(pseudo)    
+    
+    model.eval()
+    with torch.no_grad():
+        num_samples = 5
+        for i in range(num_samples):
+            z = torch.randn(1, config.latent_dim).to(device)
+            recon_x = model.decode(z, data.edge_index, pseudo, data.x)
+            recon_np = recon_x.cpu().numpy()
+            save_ply(faces, recon_np, mean, std, f"generated_sample_{i}.ply")
 
-        output_gen_filename = "generated_torus_from_latent.ply"
-        save_ply(template_faces, generated_features, mean, std, output_gen_filename)
-
-    #wandb.finish()
