@@ -245,7 +245,12 @@ if __name__ == "__main__":
             save_ply(faces, reconstructed_features, mean, std, output_filename)
     
     # Generation
-    _, faces, mean, std, data = test_data[0]
+
+    # Load the template mesh
+    template_path = "reconstructed_torus_AE_0.ply"
+    _, faces, features, mean, std = load_ply(template_path)
+    data = create_graph(vertices, features, k=16).to(device)
+
     data = data.to(device)
 
     row, col = data.edge_index
@@ -254,10 +259,19 @@ if __name__ == "__main__":
     
     model.eval()
     with torch.no_grad():
+        # Generate samples
         num_samples = 5
         for i in range(num_samples):
             z = torch.randn(1, config.latent_dim).to(device)
             recon_x = model.decode(z, data.edge_index, pseudo, data.x)
             recon_np = recon_x.cpu().numpy()
             save_ply(faces, recon_np, mean, std, f"generated_sample_{i}.ply")
-
+        
+        # Alter latent variables
+        for i in range(config.latent_dim):
+            for delta in [-3, 0, 3]: 
+                z_variant = z.clone()
+                z_variant[0, i] += delta
+                recon_x = model.decode(z_variant, data.edge_index, pseudo, data.x)
+                recon_np = recon_x.cpu().numpy()
+                save_ply(faces, recon_np, mean, std, f"latent_dim_{i}_delta_{delta}.ply")
