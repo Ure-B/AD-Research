@@ -52,7 +52,7 @@ class GraphVAE(torch.nn.Module):
         self.conv2 = SplineConv(hidden_dim, hidden_dim, dim=3, kernel_size=kernel_size)
         self.conv3 = SplineConv(hidden_dim, 2 * latent_dim, dim=3, kernel_size=kernel_size)
 
-        # Decoder (updated to accept x + z)
+        # Decoder
         self.decoder_fc1 = torch.nn.Linear(in_channels + latent_dim, hidden_dim)
         self.decoder_fc2 = torch.nn.Linear(hidden_dim, hidden_dim)
         self.deconv1 = SplineConv(hidden_dim, hidden_dim, dim=3, kernel_size=kernel_size)
@@ -186,7 +186,7 @@ if __name__ == "__main__":
             self.latent_dim = 16
     
     config = Config()
-    config.epochs = 10
+    config.epochs = 1
     config.beta = 0.0001
     config.learning_rate = 0.001
     config.hidden_dim = 64
@@ -248,7 +248,7 @@ if __name__ == "__main__":
 
     # Load the template mesh
     template_path = "reconstructed_torus_AE_0.ply"
-    _, faces, features, mean, std = load_ply(template_path)
+    vertices, faces, features, mean, std = load_ply(template_path)
     data = create_graph(vertices, features, k=16).to(device)
 
     data = data.to(device)
@@ -270,8 +270,9 @@ if __name__ == "__main__":
         # Alter latent variables
         for i in range(config.latent_dim):
             for delta in [-3, 0, 3]: 
-                z_variant = z.clone()
+                z_variant = torch.randn(1, config.latent_dim).to(device)
                 z_variant[0, i] += delta
+
                 recon_x = model.decode(z_variant, data.edge_index, pseudo, data.x)
                 recon_np = recon_x.cpu().numpy()
                 save_ply(faces, recon_np, mean, std, f"latent_dim_{i}_delta_{delta}.ply")
