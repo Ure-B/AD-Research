@@ -194,7 +194,7 @@ if __name__ == "__main__":
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print("Using device:", device)
 
-    train_dir = "training_data"
+    train_dir = "better_training_data"
     test_dir = "testing_data"
 
     # Number of files to use
