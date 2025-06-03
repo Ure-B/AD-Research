@@ -298,11 +298,12 @@ if __name__ == '__main__':
         spiral_len=9
     )
 
-    # Training
+    # TRAINING
     BATCH_SIZE = 8
     NUM_EPOCHS = 1000
     LEARNING_RATE = 1e-4
     BETA = 0.0001
+    LATENT_DIM = 16
     DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
     # Load Data
@@ -316,7 +317,7 @@ if __name__ == '__main__':
     model = SpiralNet_Plus(
         in_channels=3,
         out_channels=[32, 64],
-        latent_channels=128,
+        latent_channels=LATENT_DIM,
         spiral_indices=[spiral_indices, spiral_indices],  # duplicated for 2-layer model
         down_transform=[identity, identity],   # currently no pooling, just identity 
         up_transform=[identity, identity]
@@ -361,23 +362,12 @@ if __name__ == '__main__':
                 print("Early stopping triggered.")
                 break
     
-    #Testing
-    DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    #TESTING
 
     # Load dataset
     dataset = TorusMeshDataset('torus_vertices.pt')
     spiral_indices = torch.load('spiral_indices.pt').to(DEVICE)
     identity = torch.eye(spiral_indices.size(0)).to_sparse().to(DEVICE)
-
-    # Load model
-    model = SpiralNet_Plus(
-        in_channels=3,
-        out_channels=[32, 64],
-        latent_channels=128,
-        spiral_indices=[spiral_indices, spiral_indices],
-        down_transform=[identity, identity],
-        up_transform=[identity, identity]
-    ).to(DEVICE)
 
     original_tensor = torch.load('torus_vertices.pt')[100]
 
