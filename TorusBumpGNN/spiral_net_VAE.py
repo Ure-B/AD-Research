@@ -280,7 +280,7 @@ def loss_function(original, reconstruction, mu, log_var, beta):
     reconstruction_loss = F.l1_loss(reconstruction, original, reduction='mean')
     kld_loss = torch.mean(-0.5 * torch.sum(1 + log_var - mu ** 2 - log_var.exp(), dim = 1), dim = 0)
 
-    return reconstruction_loss + beta*kld_loss
+    return reconstruction_loss + beta * kld_loss
 
 def save_ply(faces, reconstructed_features, filename):
     """
@@ -300,11 +300,12 @@ if __name__ == '__main__':
 
     # TRAINING
     BATCH_SIZE = 8
-    NUM_EPOCHS = 1000
+    NUM_EPOCHS = 200
     LEARNING_RATE = 1e-4
     BETA = 0.0001
     LATENT_DIM = 16
     DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    PATIENCE = 10
 
     # Load Data
     dataset = TorusMeshDataset('torus_vertices.pt')
@@ -328,11 +329,10 @@ if __name__ == '__main__':
     criterion = nn.MSELoss()
 
     #Training Loop
-    PATIENCE = 10
     best_loss = float('inf')
     patience_counter = 0
 
-    for epoch in range(NUM_EPOCHS):
+    for epoch in tqdm(range(NUM_EPOCHS)):
         model.train()
         epoch_loss = 0.0
 
@@ -381,7 +381,14 @@ if __name__ == '__main__':
     x = dataset[100]['x'].unsqueeze(0).to(DEVICE)
 
     with torch.no_grad():
+        # Reconstruction
         recon_tensor = model({'x': x})['re_x'].squeeze(0).cpu()
+
+        # Generation
+        for i in range(0, 5):
+            z = torch.randn(1, LATENT_DIM).to(DEVICE)  # Sampled latent vector
+            generated_vertices = model.decoder(z)[0].cpu().numpy()
+            save_ply(faces, generated_vertices, f"generated_torus_spiralnet_{i}.ply")
 
     original_vertices = np.array(original_tensor.tolist())
     reconstructed_vertices = np.array(recon_tensor.tolist())
